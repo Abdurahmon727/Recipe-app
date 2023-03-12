@@ -5,4 +5,5 @@ import '../entity/recipe.dart';
 
 abstract class HomeRepository {
   Future<Either<Failure, List<RecipeEntity>>> getRecipies();
+  Future<Either<Failure, List<RecipeEntity>>> getSimilarRecipes(int id);
 }

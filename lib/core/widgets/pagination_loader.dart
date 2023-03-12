@@ -51,7 +51,7 @@ class PaginationLoader extends StatelessWidget {
                   }
                 },
                 child: !isFailedToLoad
-                    ? const SpinKitThreeBounce(size: 20, color: black)
+                    ? const SpinKitThreeBounce(size: 20, color: orange)
                     : const SizedBox(),
               )
             ],

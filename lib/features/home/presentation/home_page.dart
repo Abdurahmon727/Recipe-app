@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:remote_recipe/features/bottom_navigation_bar/widgets/navigator.dart';
-import 'package:remote_recipe/features/home/presentation/pages/detailed_recipe.dart';
 
 import '../../../assets/colors/colors.dart';
 import '../../../core/models/formz/formz_status.dart';
 import '../../../core/widgets/pagination_loader.dart';
-import 'bloc/home_bloc.dart';
+import '../../bottom_navigation_bar/widgets/navigator.dart';
+import 'bloc/home_bloc/home_bloc.dart';
+import 'pages/detailed_recipe.dart';
 import 'widgets/menu_recipe.dart';
 
 class HomePage extends StatelessWidget {

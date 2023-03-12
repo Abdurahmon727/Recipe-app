@@ -13,15 +13,32 @@ class HomeRepositoryImpl extends HomeRepository {
   @override
   Future<Either<Failure, List<RecipeEntity>>> getRecipies() async {
     if (await _networkInfo.connected) {
-      // try {
-      final data = await _remoteDataSource.getRecipes();
+      try {
+        final data = await _remoteDataSource.getRecipes();
 
-      return Right(Converter.recipeModelToEntity(data));
-      // } on ServerException {
-      //   rethrow;
-      // } catch (e) {
-      //   return Left(ServerFailure(errorMessage: e.toString()));
-      // }
+        return Right(Converter.recipeModelToEntity(data));
+      } on ServerException {
+        rethrow;
+      } catch (e) {
+        return Left(ServerFailure(errorMessage: e.toString()));
+      }
+    } else {
+      return Left(const ServerFailure(errorMessage: "No Internet"));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<RecipeEntity>>> getSimilarRecipes(int id) async {
+    if (await _networkInfo.connected) {
+      try {
+        final data = await _remoteDataSource.getSimilarRecipes(id);
+
+        return Right(Converter.recipeModelToEntity(data));
+      } on ServerException {
+        rethrow;
+      } catch (e) {
+        return Left(ServerFailure(errorMessage: e.toString()));
+      }
     } else {
       return Left(const ServerFailure(errorMessage: "No Internet"));
     }

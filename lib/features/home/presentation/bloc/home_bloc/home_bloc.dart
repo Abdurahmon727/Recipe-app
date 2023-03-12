@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../../core/models/formz/formz_status.dart';
-import '../../../../core/usecases/usecase.dart';
-import '../../domain/entity/recipe.dart';
-import '../../domain/usecase/get_recipies.dart';
+import '../../../../../core/models/formz/formz_status.dart';
+import '../../../../../core/usecases/usecase.dart';
+import '../../../domain/entity/recipe.dart';
+import '../../../domain/usecase/get_recipies.dart';
 
 part 'home_bloc.freezed.dart';
 part 'home_event.dart';
