@@ -53,12 +53,6 @@ class HomePage extends StatelessWidget {
                                 ) =>
                                     DetailedRecipePage(entity: entity),
                               ));
-                              // Navigator.push(
-                              //   context,
-                              //   fade(
-                              //     page: DetailedRecipePage(entity: entity),
-                              //   ),
-                              // );
                             },
                             child: WMenuRecipe(entity: entity)))
                         .toList(),
