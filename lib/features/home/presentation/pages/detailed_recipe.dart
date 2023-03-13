@@ -1,5 +1,6 @@
 // ignore_for_file: curly_braces_in_flow_control_structures
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -89,11 +90,14 @@ class _DetailedRecipePageState extends State<DetailedRecipePage> {
             },
             child: ListView(
               children: [
-                FadeInImage.assetNetwork(
-                    placeholder: AppImages.defaultRecipe,
-                    imageErrorBuilder: (context, error, stackTrace) =>
-                        Image.asset(AppImages.defaultRecipe),
-                    image: widget.entity.image),
+                CachedNetworkImage(
+                  imageUrl: widget.entity.image,
+                  fit: BoxFit.cover,
+                  errorWidget: (_, __, e) =>
+                      Image.asset(AppImages.defaultRecipe),
+                  placeholder: (context, url) =>
+                      Image.asset(AppImages.defaultRecipe),
+                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Column(

@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:remote_recipe/assets/images/images.dart';
@@ -36,11 +37,13 @@ class WMenuRecipe extends StatelessWidget {
             child: SizedBox(
               height: double.infinity,
               width: 180,
-              child: FadeInImage.assetNetwork(
-                  placeholder: AppImages.defaultRecipe,
-                  imageErrorBuilder: (context, error, stackTrace) =>
-                      Image.asset(AppImages.defaultRecipe),
-                  image: entity.image),
+              child: CachedNetworkImage(
+                imageUrl: entity.image,
+                fit: BoxFit.cover,
+                errorWidget: (_, __, e) => Image.asset(AppImages.defaultRecipe),
+                placeholder: (context, url) =>
+                    Image.asset(AppImages.defaultRecipe),
+              ),
             ),
           ),
           const SizedBox(width: 5),

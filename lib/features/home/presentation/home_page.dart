@@ -44,12 +44,21 @@ class HomePage extends StatelessWidget {
                     list: state.entities
                         .map((entity) => GestureDetector(
                             onTap: () {
-                              Navigator.push(
+                              Navigator.of(
                                 context,
-                                fade(
-                                  page: DetailedRecipePage(entity: entity),
-                                ),
-                              );
+                                rootNavigator: true,
+                              ).push(MaterialPageRoute(
+                                builder: (
+                                  context,
+                                ) =>
+                                    DetailedRecipePage(entity: entity),
+                              ));
+                              // Navigator.push(
+                              //   context,
+                              //   fade(
+                              //     page: DetailedRecipePage(entity: entity),
+                              //   ),
+                              // );
                             },
                             child: WMenuRecipe(entity: entity)))
                         .toList(),

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 final keys = [
   '01a8c64100a84f2d9dc0f62bbd9d6fa6',
   '48581b7bb9e64c64847e5bdd0c95d01c',
@@ -12,6 +10,6 @@ final keys = [
   '2a5e14fde87e48e8a266680987243770',
   'd85a3661a88d4b32b4bcb50698f116b7',
 ];
-final apiKey = keys[Random().nextInt(keys.length)];
+final apiKey = keys[0];
 
 abstract class AppConstants {}

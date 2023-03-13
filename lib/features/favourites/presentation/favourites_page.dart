@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../assets/colors/colors.dart';
 import '../../../core/data/service_locator.dart';
 import '../../../core/models/formz/formz_status.dart';
-import '../../bottom_navigation_bar/widgets/navigator.dart';
 import '../../home/presentation/pages/detailed_recipe.dart';
 import '../../home/presentation/widgets/menu_recipe.dart';
 import 'bloc/favourites_bloc.dart';
@@ -37,11 +36,16 @@ class FavouritesPage extends StatelessWidget {
                   return ListView.separated(
                     padding: const EdgeInsets.all(16),
                     itemBuilder: (context, index) => GestureDetector(
-                        onTap: () => Navigator.push(
-                            context,
-                            fade(
-                                page: DetailedRecipePage(
-                                    entity: state.entities[index]))),
+                        onTap: () => Navigator.of(
+                              context,
+                              rootNavigator: true,
+                            ).push(MaterialPageRoute(
+                              builder: (
+                                context,
+                              ) =>
+                                  DetailedRecipePage(
+                                      entity: state.entities[index]),
+                            )),
                         child: WMenuRecipe(entity: state.entities[index])),
                     separatorBuilder: (_, __) => const SizedBox(
                       height: 10,

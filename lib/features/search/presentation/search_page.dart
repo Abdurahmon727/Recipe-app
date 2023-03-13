@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:remote_recipe/assets/colors/colors.dart';
+
+import '../../../assets/colors/colors.dart';
 
 class SearchPage extends StatelessWidget {
   SearchPage({super.key});
@@ -16,7 +17,7 @@ class SearchPage extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextField(
-                style: TextStyle(color: white),
+                style: const TextStyle(color: white),
                 cursorColor: white,
                 controller: searchController,
                 textCapitalization: TextCapitalization.sentences,
