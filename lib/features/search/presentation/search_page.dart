@@ -6,71 +6,84 @@ import '../../../core/models/formz/formz_status.dart';
 import 'bloc/search_bloc.dart';
 
 class SearchPage extends StatelessWidget {
-  SearchPage({super.key});
+  const SearchPage({super.key});
 
-  final searchController = TextEditingController();
+  static const List<String> _kOptions = <String>[
+    'aardvark',
+    'bobcat',
+    'chameleon',
+  ];
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => SearchBloc(),
-        child: Scaffold(
+      create: (context) => SearchBloc(),
+      child: Builder(builder: (context) {
+        return Scaffold(
           appBar: AppBar(
             title: const Text('Search'),
             bottom: PreferredSize(
-                preferredSize: const Size.fromHeight(50),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: BlocBuilder<SearchBloc, SearchState>(
-                    builder: (context, state) {
-                      return Autocomplete<String>(
-                        optionsBuilder: (TextEditingValue textEditingValue) {
-                          if (textEditingValue.text == '') {
-                            return const Iterable<String>.empty();
-                          }
-                          final result =
-                              context.read<SearchBloc>().state.suggestions;
-                          return Iterable.generate(
-                            result.length,
-                            (index) => result[index],
-                          );
+              preferredSize: const Size.fromHeight(50),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Autocomplete(
+                  optionsBuilder: (TextEditingValue textEditingValue) {
+                    if (textEditingValue.text.isEmpty) {
+                      return const Iterable<String>.empty();
+                    }
+                    return _kOptions.where((String option) {
+                      return option
+                          .contains(textEditingValue.text.toLowerCase());
+                    });
 
-                          //TODO
-                        },
-                        onSelected: (String selection) {
-                          //TODO
-                          debugPrint('You just selected $selection');
-                        },
-                        fieldViewBuilder: (context, textEditingController,
-                                focusNode, onFieldSubmitted) =>
-                            TextField(
-                          autofocus: true,
-                          style: const TextStyle(color: white),
-                          cursorColor: white,
-                          controller: searchController,
-                          textCapitalization: TextCapitalization.sentences,
-                          decoration: const InputDecoration(
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: white),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(15))),
-                              contentPadding: EdgeInsets.only(left: 8),
-                              border: OutlineInputBorder(
-                                  borderSide: BorderSide(color: white),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(15)))),
-                        ),
-                      );
-                    },
+                    final result = context.read<SearchBloc>().state.suggestions;
+                    return Iterable.generate(
+                      result.length,
+                      (index) => result[index],
+                    );
+
+                    //TODO
+                  },
+                  onSelected: (String selection) {
+                    context
+                        .read<SearchBloc>()
+                        .add(SearchEvent.getResults(selection));
+                    debugPrint('You just selected $selection');
+                  },
+                  fieldViewBuilder: (context, textEditingController, focusNode,
+                          onFieldSubmitted) =>
+                      // TextField(
+
+                      //   focusNode: focusNode,
+                      //   onSubmitted: (_) => onFieldSubmitted,
+                      // )
+                      TextField(
+                    focusNode: focusNode,
+                    autofocus: true,
+                    style: const TextStyle(color: white),
+                    cursorColor: white,
+                    controller: textEditingController,
+                    textCapitalization: TextCapitalization.sentences,
+                    onSubmitted: (_) => onFieldSubmitted,
+                    decoration: const InputDecoration(
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: white),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15))),
+                        contentPadding: EdgeInsets.only(left: 8),
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide(color: white),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15)))),
                   ),
-                )),
+                ),
+              ),
+            ),
             backgroundColor: orange,
           ),
           body: BlocBuilder<SearchBloc, SearchState>(builder: (context, state) {
             if (state.status == FormzStatus.pure) {
-              context
-                  .read<SearchBloc>()
-                  .add(SearchEvent.getResults(searchController.text));
+              //TODO: return last searched items with chips
               return const SizedBox();
             } else if (state.status == FormzStatus.submissionInProgress) {
               return const Center(
@@ -79,9 +92,11 @@ class SearchPage extends StatelessWidget {
             } else if (state.status == FormzStatus.submissionSuccess) {
               return Text('Success');
             } else {
-              return Text('s');
+              return Text(state.errorMessage);
             }
           }),
-        ));
+        );
+      }),
+    );
   }
 }

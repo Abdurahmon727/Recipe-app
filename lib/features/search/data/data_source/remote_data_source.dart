@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:remote_recipe/assets/constants/constants.dart';
-import 'package:remote_recipe/core/error/exeptions.dart';
-import 'package:remote_recipe/features/home/data/models/recipe.dart';
+
+import '../../../../assets/constants/constants.dart';
+import '../../../../core/error/exeptions.dart';
+import '../../../home/data/models/recipe.dart';
 
 abstract class SearchRemoteDataSource {
   Future<List<String>> getSuggests(String query);
@@ -10,7 +10,8 @@ abstract class SearchRemoteDataSource {
 }
 
 class SearchRemoteDataSourceImpl extends SearchRemoteDataSource {
-  final _dio = Dio();
+  final _dio = Dio(BaseOptions());
+  @override
   Future<List<String>> getSuggests(String query) async {
     final result = await _dio.get(
         'https://api.spoonacular.com/recipes/autocomplete?apiKey=$apiKey&number=10&query=$query');
@@ -24,8 +25,20 @@ class SearchRemoteDataSourceImpl extends SearchRemoteDataSource {
   }
 
   @override
-  Future<List<RecipeModel>> getResults(String query) {
-    // TODO: implement getResults
-    throw UnimplementedError();
+  Future<List<RecipeModel>> getResults(String query) async {
+    final respont = await _dio.get(
+        'https://api.spoonacular.com/recipes/complexSearch?apiKey=$apiKey&query=$query');
+    if (respont.statusCode! >= 200 && respont.statusCode! < 300) {
+      final data = respont.data['id' as List].map((id) async {
+        final response = await _dio.get(
+            'https://api.spoonacular.com/recipes/$id/information?apiKey=$apiKey');
+        return RecipeModel.fromJson(response.data);
+      }).toList();
+
+      return data;
+    } else {
+      throw ServerException(
+          statusMessage: 'Server Failure', statusCode: respont.statusCode!);
+    }
   }
 }
