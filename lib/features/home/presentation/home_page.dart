@@ -62,7 +62,14 @@ class HomePage extends StatelessWidget {
                   );
                 } else {
                   return Center(
-                    child: Text(state.errorMessage),
+                    child: SingleChildScrollView(
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      child: SizedBox(
+                        height: MediaQuery.of(context).size.height - 152,
+                        width: MediaQuery.of(context).size.width,
+                        child: Center(child: Text(state.errorMessage)),
+                      ),
+                    ),
                   );
                 }
               },

@@ -7,9 +7,9 @@ abstract class Converter {
         .map((model) => RecipeEntity(
             id: model.id,
             readyInMinutes: model.readyInMinutes,
-            title: model.title,
-            image: model.image,
-            instructions: model.instructions,
+            title: model.title ?? '',
+            image: model.image ?? '',
+            instructions: model.instructions ?? '',
             healthyScore: model.healthScore))
         .toList();
   }

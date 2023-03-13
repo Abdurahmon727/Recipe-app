@@ -1,9 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
+import 'package:remote_recipe/assets/images/images.dart';
 import 'package:remote_recipe/features/home/domain/entity/recipe.dart';
 
 import '../../../../assets/colors/colors.dart';
@@ -38,13 +36,11 @@ class WMenuRecipe extends StatelessWidget {
             child: SizedBox(
               height: double.infinity,
               width: 180,
-              child: Image.network(entity.image,
-                  loadingBuilder: (_, child, loadingProgress) {
-                if (loadingProgress == null) return child;
-                return const Center(
-                  child: CircularProgressIndicator(color: orange),
-                );
-              }),
+              child: FadeInImage.assetNetwork(
+                  placeholder: AppImages.defaultRecipe,
+                  imageErrorBuilder: (context, error, stackTrace) =>
+                      Image.asset(AppImages.defaultRecipe),
+                  image: entity.image),
             ),
           ),
           const SizedBox(width: 5),

@@ -10,9 +10,9 @@ _$_RecipeModel _$$_RecipeModelFromJson(Map<String, dynamic> json) =>
     _$_RecipeModel(
       id: json['id'] as int,
       readyInMinutes: json['readyInMinutes'] as int,
-      title: json['title'],
-      image: json['image'],
-      instructions: json['instructions'] as String,
+      title: json['title'] as String?,
+      image: json['image'] as String?,
+      instructions: json['instructions'] as String?,
       healthScore: json['healthScore'] as int,
     );
 

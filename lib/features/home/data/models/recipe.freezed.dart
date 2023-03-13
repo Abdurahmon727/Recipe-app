@@ -22,9 +22,9 @@ RecipeModel _$RecipeModelFromJson(Map<String, dynamic> json) {
 mixin _$RecipeModel {
   int get id => throw _privateConstructorUsedError;
   int get readyInMinutes => throw _privateConstructorUsedError;
-  String get title => throw _privateConstructorUsedError;
-  String get image => throw _privateConstructorUsedError;
-  String get instructions => throw _privateConstructorUsedError;
+  String? get title => throw _privateConstructorUsedError;
+  String? get image => throw _privateConstructorUsedError;
+  String? get instructions => throw _privateConstructorUsedError;
   int get healthScore => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -42,9 +42,9 @@ abstract class $RecipeModelCopyWith<$Res> {
   $Res call(
       {int id,
       int readyInMinutes,
-      String title,
-      String image,
-      String instructions,
+      String? title,
+      String? image,
+      String? instructions,
       int healthScore});
 }
 
@@ -63,9 +63,9 @@ class _$RecipeModelCopyWithImpl<$Res, $Val extends RecipeModel>
   $Res call({
     Object? id = null,
     Object? readyInMinutes = null,
-    Object? title = null,
-    Object? image = null,
-    Object? instructions = null,
+    Object? title = freezed,
+    Object? image = freezed,
+    Object? instructions = freezed,
     Object? healthScore = null,
   }) {
     return _then(_value.copyWith(
@@ -77,18 +77,18 @@ class _$RecipeModelCopyWithImpl<$Res, $Val extends RecipeModel>
           ? _value.readyInMinutes
           : readyInMinutes // ignore: cast_nullable_to_non_nullable
               as int,
-      title: null == title
+      title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      image: null == image
+              as String?,
+      image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as String,
-      instructions: null == instructions
+              as String?,
+      instructions: freezed == instructions
           ? _value.instructions
           : instructions // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       healthScore: null == healthScore
           ? _value.healthScore
           : healthScore // ignore: cast_nullable_to_non_nullable
@@ -108,9 +108,9 @@ abstract class _$$_RecipeModelCopyWith<$Res>
   $Res call(
       {int id,
       int readyInMinutes,
-      String title,
-      String image,
-      String instructions,
+      String? title,
+      String? image,
+      String? instructions,
       int healthScore});
 }
 
@@ -127,9 +127,9 @@ class __$$_RecipeModelCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? readyInMinutes = null,
-    Object? title = null,
-    Object? image = null,
-    Object? instructions = null,
+    Object? title = freezed,
+    Object? image = freezed,
+    Object? instructions = freezed,
     Object? healthScore = null,
   }) {
     return _then(_$_RecipeModel(
@@ -141,18 +141,18 @@ class __$$_RecipeModelCopyWithImpl<$Res>
           ? _value.readyInMinutes
           : readyInMinutes // ignore: cast_nullable_to_non_nullable
               as int,
-      title: null == title
+      title: freezed == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      image: null == image
+              as String?,
+      image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as String,
-      instructions: null == instructions
+              as String?,
+      instructions: freezed == instructions
           ? _value.instructions
           : instructions // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       healthScore: null == healthScore
           ? _value.healthScore
           : healthScore // ignore: cast_nullable_to_non_nullable
@@ -180,11 +180,11 @@ class _$_RecipeModel implements _RecipeModel {
   @override
   final int readyInMinutes;
   @override
-  final String title;
+  final String? title;
   @override
-  final String image;
+  final String? image;
   @override
-  final String instructions;
+  final String? instructions;
   @override
   final int healthScore;
 
@@ -232,9 +232,9 @@ abstract class _RecipeModel implements RecipeModel {
   const factory _RecipeModel(
       {required final int id,
       required final int readyInMinutes,
-      required final String title,
-      required final String image,
-      required final String instructions,
+      required final String? title,
+      required final String? image,
+      required final String? instructions,
       required final int healthScore}) = _$_RecipeModel;
 
   factory _RecipeModel.fromJson(Map<String, dynamic> json) =
@@ -245,11 +245,11 @@ abstract class _RecipeModel implements RecipeModel {
   @override
   int get readyInMinutes;
   @override
-  String get title;
+  String? get title;
   @override
-  String get image;
+  String? get image;
   @override
-  String get instructions;
+  String? get instructions;
   @override
   int get healthScore;
   @override

@@ -1,7 +1,9 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/cupertino.dart';
+import 'package:remote_recipe/features/favourites/presentation/favourites_page.dart';
 import 'package:remote_recipe/features/home/presentation/home_page.dart';
+import 'package:remote_recipe/features/search/presentation/search_page.dart';
 
 import '../navbar/nav_item_enum.dart';
 
@@ -33,11 +35,11 @@ class _TabNavigatorState extends State<TabNavigator>
         };
       case NavItemEnum.search:
         return {
-          TabNavigatorRoutes.root: (context) => const SizedBox(),
+          TabNavigatorRoutes.root: (context) => SearchPage(),
         };
       case NavItemEnum.favourites:
         return {
-          TabNavigatorRoutes.root: (context) => const SizedBox(),
+          TabNavigatorRoutes.root: (context) => const FavouritesPage(),
         };
       case NavItemEnum.account:
         return {
