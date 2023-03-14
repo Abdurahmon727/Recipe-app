@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../../core/models/formz/formz_status.dart';
@@ -26,6 +27,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       result.either((fail) {
         emit(state.copyWith(status: FormzStatus.submissionFailure));
       }, (data) {
+        print('results');
         emit(state.copyWith(
             status: FormzStatus.submissionSuccess, results: data));
       });

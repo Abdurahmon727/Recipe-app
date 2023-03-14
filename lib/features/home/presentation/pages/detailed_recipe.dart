@@ -6,6 +6,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:like_button/like_button.dart';
+import 'package:remote_recipe/core/app_functions.dart';
 import 'package:remote_recipe/features/favourites/presentation/bloc/favourites_bloc.dart';
 
 import '../../../../assets/colors/colors.dart';
@@ -102,7 +103,8 @@ class _DetailedRecipePageState extends State<DetailedRecipePage> {
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Column(
                     children: [
-                      Text(widget.entity.instructions),
+                      Text(AppFunctions.removeHtmlTags(
+                          widget.entity.instructions)),
                       const Text(
                         'Similar Recipes',
                         style: TextStyle(fontSize: 18),

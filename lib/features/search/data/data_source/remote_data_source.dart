@@ -16,7 +16,9 @@ class SearchRemoteDataSourceImpl extends SearchRemoteDataSource {
     final result = await _dio.get(
         'https://api.spoonacular.com/recipes/autocomplete?apiKey=$apiKey&number=5&query=$query');
     if (result.statusCode! >= 200 && result.statusCode! < 300) {
-      final data = result.data['title' as List].map((title) => title).toList();
+      final list = result.data as List;
+      final data = list.map((map) => map['title'] as String).toList();
+
       return data;
     } else {
       throw ServerException(
@@ -27,15 +29,16 @@ class SearchRemoteDataSourceImpl extends SearchRemoteDataSource {
   @override
   Future<List<RecipeModel>> getResults(String query) async {
     final respont = await _dio.get(
-        'https://api.spoonacular.com/recipes/complexSearch?apiKey=$apiKey&query=$query');
+        'https://api.spoonacular.com/recipes/complexSearch?apiKey=$apiKey&query=$query&number=10');
     if (respont.statusCode! >= 200 && respont.statusCode! < 300) {
-      final data = respont.data['results']['id' as List].map((id) async {
+      final list = respont.data['results'] as List;
+      final data = list.map((map) async {
         final response = await _dio.get(
-            'https://api.spoonacular.com/recipes/$id/information?apiKey=$apiKey');
+            'https://api.spoonacular.com/recipes/${map['id']}/information?apiKey=$apiKey');
         return RecipeModel.fromJson(response.data);
       }).toList();
 
-      return data;
+      return Future.wait(data);
     } else {
       throw ServerException(
           statusMessage: 'Server Failure', statusCode: respont.statusCode!);

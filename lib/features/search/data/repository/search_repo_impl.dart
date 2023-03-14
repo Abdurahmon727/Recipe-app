@@ -14,16 +14,16 @@ class SearchRepositoryImpl extends SearchRepository {
   @override
   Future<Either<Failure, List<String>>> getSuggestion(String query) async {
     if (await _networkInfo.connected) {
-      try {
-        final data = await _remoteDataSource.getSuggests(query);
-        return Right(data);
-      } on ServerException {
-        rethrow;
-      } catch (e) {
-        return Left(ServerFailure(
-          errorMessage: e.toString(),
-        ));
-      }
+      // try {
+      final data = await _remoteDataSource.getSuggests(query);
+      return Right(data);
+      // } on ServerException {
+      //   rethrow;
+      // } catch (e) {
+      //   return Left(ServerFailure(
+      //     errorMessage: e.toString(),
+      //   ));
+      // }
     } else {
       return Left(const ServerFailure(errorMessage: 'No Internet'));
     }
@@ -32,16 +32,16 @@ class SearchRepositoryImpl extends SearchRepository {
   @override
   Future<Either<Failure, List<RecipeEntity>>> getResults(String query) async {
     if (await _networkInfo.connected) {
-      try {
-        final data = await _remoteDataSource.getResults(query);
-        return Right(Converter.recipeModelToEntity(data));
-      } on ServerException {
-        rethrow;
-      } catch (e) {
-        return Left(ServerFailure(
-          errorMessage: e.toString(),
-        ));
-      }
+      // try {
+      final data = await _remoteDataSource.getResults(query);
+      return Right(Converter.recipeModelToEntity(data));
+      // } on ServerException {
+      //   rethrow;
+      // } catch (e) {
+      //   return Left(ServerFailure(
+      //     errorMessage: e.toString(),
+      //   ));
+      // }
     } else {
       return Left(const ServerFailure(errorMessage: 'No Internet'));
     }

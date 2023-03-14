@@ -79,6 +79,12 @@ abstract class AppFunctions {
   //   }
   // }
 
+  static String removeHtmlTags(String data) {
+    RegExp exp = RegExp(r"<[^>]*>", multiLine: true, caseSensitive: true);
+
+    return data.replaceAll(exp, '');
+  }
+
   static String getTimeAgoDay(String date) {
     final DateTime thatTime = DateTime.parse(date);
     final DateTime now = DateTime.now();
