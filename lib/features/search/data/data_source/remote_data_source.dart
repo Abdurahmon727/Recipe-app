@@ -14,7 +14,7 @@ class SearchRemoteDataSourceImpl extends SearchRemoteDataSource {
   @override
   Future<List<String>> getSuggests(String query) async {
     final result = await _dio.get(
-        'https://api.spoonacular.com/recipes/autocomplete?apiKey=$apiKey&number=10&query=$query');
+        'https://api.spoonacular.com/recipes/autocomplete?apiKey=$apiKey&number=5&query=$query');
     if (result.statusCode! >= 200 && result.statusCode! < 300) {
       final data = result.data['title' as List].map((title) => title).toList();
       return data;
@@ -29,7 +29,7 @@ class SearchRemoteDataSourceImpl extends SearchRemoteDataSource {
     final respont = await _dio.get(
         'https://api.spoonacular.com/recipes/complexSearch?apiKey=$apiKey&query=$query');
     if (respont.statusCode! >= 200 && respont.statusCode! < 300) {
-      final data = respont.data['id' as List].map((id) async {
+      final data = respont.data['results']['id' as List].map((id) async {
         final response = await _dio.get(
             'https://api.spoonacular.com/recipes/$id/information?apiKey=$apiKey');
         return RecipeModel.fromJson(response.data);

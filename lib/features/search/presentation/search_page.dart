@@ -28,21 +28,20 @@ class SearchPage extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Autocomplete(
                   optionsBuilder: (TextEditingValue textEditingValue) {
+                    context
+                        .read<SearchBloc>()
+                        .add(SearchEvent.getSuggestions(textEditingValue.text));
                     if (textEditingValue.text.isEmpty) {
                       return const Iterable<String>.empty();
                     }
-                    return _kOptions.where((String option) {
-                      return option
-                          .contains(textEditingValue.text.toLowerCase());
-                    });
+                    // return context.read<SearchBloc>().state.suggestions;
 
                     final result = context.read<SearchBloc>().state.suggestions;
+
                     return Iterable.generate(
                       result.length,
                       (index) => result[index],
                     );
-
-                    //TODO
                   },
                   onSelected: (String selection) {
                     context
