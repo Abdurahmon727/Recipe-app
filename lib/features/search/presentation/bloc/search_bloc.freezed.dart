@@ -16,23 +16,25 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$SearchEvent {
-  String get query => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String query) getSuggestions,
     required TResult Function(String query) getResults,
+    required TResult Function(int id) getSuggestionResult,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String query)? getSuggestions,
     TResult? Function(String query)? getResults,
+    TResult? Function(int id)? getSuggestionResult,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String query)? getSuggestions,
     TResult Function(String query)? getResults,
+    TResult Function(int id)? getSuggestionResult,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -40,24 +42,23 @@ mixin _$SearchEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_GetSuggestions value) getSuggestions,
     required TResult Function(_GetResults value) getResults,
+    required TResult Function(_GetSuggestionResult value) getSuggestionResult,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetSuggestions value)? getSuggestions,
     TResult? Function(_GetResults value)? getResults,
+    TResult? Function(_GetSuggestionResult value)? getSuggestionResult,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetSuggestions value)? getSuggestions,
     TResult Function(_GetResults value)? getResults,
+    TResult Function(_GetSuggestionResult value)? getSuggestionResult,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $SearchEventCopyWith<SearchEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -66,8 +67,6 @@ abstract class $SearchEventCopyWith<$Res> {
   factory $SearchEventCopyWith(
           SearchEvent value, $Res Function(SearchEvent) then) =
       _$SearchEventCopyWithImpl<$Res, SearchEvent>;
-  @useResult
-  $Res call({String query});
 }
 
 /// @nodoc
@@ -79,28 +78,13 @@ class _$SearchEventCopyWithImpl<$Res, $Val extends SearchEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? query = null,
-  }) {
-    return _then(_value.copyWith(
-      query: null == query
-          ? _value.query
-          : query // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$_GetSuggestionsCopyWith<$Res>
-    implements $SearchEventCopyWith<$Res> {
+abstract class _$$_GetSuggestionsCopyWith<$Res> {
   factory _$$_GetSuggestionsCopyWith(
           _$_GetSuggestions value, $Res Function(_$_GetSuggestions) then) =
       __$$_GetSuggestionsCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call({String query});
 }
@@ -162,6 +146,7 @@ class _$_GetSuggestions implements _GetSuggestions {
   TResult when<TResult extends Object?>({
     required TResult Function(String query) getSuggestions,
     required TResult Function(String query) getResults,
+    required TResult Function(int id) getSuggestionResult,
   }) {
     return getSuggestions(query);
   }
@@ -171,6 +156,7 @@ class _$_GetSuggestions implements _GetSuggestions {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String query)? getSuggestions,
     TResult? Function(String query)? getResults,
+    TResult? Function(int id)? getSuggestionResult,
   }) {
     return getSuggestions?.call(query);
   }
@@ -180,6 +166,7 @@ class _$_GetSuggestions implements _GetSuggestions {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String query)? getSuggestions,
     TResult Function(String query)? getResults,
+    TResult Function(int id)? getSuggestionResult,
     required TResult orElse(),
   }) {
     if (getSuggestions != null) {
@@ -193,6 +180,7 @@ class _$_GetSuggestions implements _GetSuggestions {
   TResult map<TResult extends Object?>({
     required TResult Function(_GetSuggestions value) getSuggestions,
     required TResult Function(_GetResults value) getResults,
+    required TResult Function(_GetSuggestionResult value) getSuggestionResult,
   }) {
     return getSuggestions(this);
   }
@@ -202,6 +190,7 @@ class _$_GetSuggestions implements _GetSuggestions {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetSuggestions value)? getSuggestions,
     TResult? Function(_GetResults value)? getResults,
+    TResult? Function(_GetSuggestionResult value)? getSuggestionResult,
   }) {
     return getSuggestions?.call(this);
   }
@@ -211,6 +200,7 @@ class _$_GetSuggestions implements _GetSuggestions {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetSuggestions value)? getSuggestions,
     TResult Function(_GetResults value)? getResults,
+    TResult Function(_GetSuggestionResult value)? getSuggestionResult,
     required TResult orElse(),
   }) {
     if (getSuggestions != null) {
@@ -223,21 +213,17 @@ class _$_GetSuggestions implements _GetSuggestions {
 abstract class _GetSuggestions implements SearchEvent {
   const factory _GetSuggestions(final String query) = _$_GetSuggestions;
 
-  @override
   String get query;
-  @override
   @JsonKey(ignore: true)
   _$$_GetSuggestionsCopyWith<_$_GetSuggestions> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_GetResultsCopyWith<$Res>
-    implements $SearchEventCopyWith<$Res> {
+abstract class _$$_GetResultsCopyWith<$Res> {
   factory _$$_GetResultsCopyWith(
           _$_GetResults value, $Res Function(_$_GetResults) then) =
       __$$_GetResultsCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call({String query});
 }
@@ -299,6 +285,7 @@ class _$_GetResults implements _GetResults {
   TResult when<TResult extends Object?>({
     required TResult Function(String query) getSuggestions,
     required TResult Function(String query) getResults,
+    required TResult Function(int id) getSuggestionResult,
   }) {
     return getResults(query);
   }
@@ -308,6 +295,7 @@ class _$_GetResults implements _GetResults {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String query)? getSuggestions,
     TResult? Function(String query)? getResults,
+    TResult? Function(int id)? getSuggestionResult,
   }) {
     return getResults?.call(query);
   }
@@ -317,6 +305,7 @@ class _$_GetResults implements _GetResults {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String query)? getSuggestions,
     TResult Function(String query)? getResults,
+    TResult Function(int id)? getSuggestionResult,
     required TResult orElse(),
   }) {
     if (getResults != null) {
@@ -330,6 +319,7 @@ class _$_GetResults implements _GetResults {
   TResult map<TResult extends Object?>({
     required TResult Function(_GetSuggestions value) getSuggestions,
     required TResult Function(_GetResults value) getResults,
+    required TResult Function(_GetSuggestionResult value) getSuggestionResult,
   }) {
     return getResults(this);
   }
@@ -339,6 +329,7 @@ class _$_GetResults implements _GetResults {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetSuggestions value)? getSuggestions,
     TResult? Function(_GetResults value)? getResults,
+    TResult? Function(_GetSuggestionResult value)? getSuggestionResult,
   }) {
     return getResults?.call(this);
   }
@@ -348,6 +339,7 @@ class _$_GetResults implements _GetResults {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetSuggestions value)? getSuggestions,
     TResult Function(_GetResults value)? getResults,
+    TResult Function(_GetSuggestionResult value)? getSuggestionResult,
     required TResult orElse(),
   }) {
     if (getResults != null) {
@@ -360,18 +352,156 @@ class _$_GetResults implements _GetResults {
 abstract class _GetResults implements SearchEvent {
   const factory _GetResults(final String query) = _$_GetResults;
 
-  @override
   String get query;
-  @override
   @JsonKey(ignore: true)
   _$$_GetResultsCopyWith<_$_GetResults> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
+abstract class _$$_GetSuggestionResultCopyWith<$Res> {
+  factory _$$_GetSuggestionResultCopyWith(_$_GetSuggestionResult value,
+          $Res Function(_$_GetSuggestionResult) then) =
+      __$$_GetSuggestionResultCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int id});
+}
+
+/// @nodoc
+class __$$_GetSuggestionResultCopyWithImpl<$Res>
+    extends _$SearchEventCopyWithImpl<$Res, _$_GetSuggestionResult>
+    implements _$$_GetSuggestionResultCopyWith<$Res> {
+  __$$_GetSuggestionResultCopyWithImpl(_$_GetSuggestionResult _value,
+      $Res Function(_$_GetSuggestionResult) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+  }) {
+    return _then(_$_GetSuggestionResult(
+      null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_GetSuggestionResult implements _GetSuggestionResult {
+  const _$_GetSuggestionResult(this.id);
+
+  @override
+  final int id;
+
+  @override
+  String toString() {
+    return 'SearchEvent.getSuggestionResult(id: $id)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_GetSuggestionResult &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, id);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_GetSuggestionResultCopyWith<_$_GetSuggestionResult> get copyWith =>
+      __$$_GetSuggestionResultCopyWithImpl<_$_GetSuggestionResult>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String query) getSuggestions,
+    required TResult Function(String query) getResults,
+    required TResult Function(int id) getSuggestionResult,
+  }) {
+    return getSuggestionResult(id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String query)? getSuggestions,
+    TResult? Function(String query)? getResults,
+    TResult? Function(int id)? getSuggestionResult,
+  }) {
+    return getSuggestionResult?.call(id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String query)? getSuggestions,
+    TResult Function(String query)? getResults,
+    TResult Function(int id)? getSuggestionResult,
+    required TResult orElse(),
+  }) {
+    if (getSuggestionResult != null) {
+      return getSuggestionResult(id);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetSuggestions value) getSuggestions,
+    required TResult Function(_GetResults value) getResults,
+    required TResult Function(_GetSuggestionResult value) getSuggestionResult,
+  }) {
+    return getSuggestionResult(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetSuggestions value)? getSuggestions,
+    TResult? Function(_GetResults value)? getResults,
+    TResult? Function(_GetSuggestionResult value)? getSuggestionResult,
+  }) {
+    return getSuggestionResult?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetSuggestions value)? getSuggestions,
+    TResult Function(_GetResults value)? getResults,
+    TResult Function(_GetSuggestionResult value)? getSuggestionResult,
+    required TResult orElse(),
+  }) {
+    if (getSuggestionResult != null) {
+      return getSuggestionResult(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetSuggestionResult implements SearchEvent {
+  const factory _GetSuggestionResult(final int id) = _$_GetSuggestionResult;
+
+  int get id;
+  @JsonKey(ignore: true)
+  _$$_GetSuggestionResultCopyWith<_$_GetSuggestionResult> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$SearchState {
   FormzStatus get status => throw _privateConstructorUsedError;
-  List<String> get suggestions => throw _privateConstructorUsedError;
+  List<SuggestionEntity> get suggestions => throw _privateConstructorUsedError;
   List<RecipeEntity> get results => throw _privateConstructorUsedError;
   String get errorMessage => throw _privateConstructorUsedError;
 
@@ -388,7 +518,7 @@ abstract class $SearchStateCopyWith<$Res> {
   @useResult
   $Res call(
       {FormzStatus status,
-      List<String> suggestions,
+      List<SuggestionEntity> suggestions,
       List<RecipeEntity> results,
       String errorMessage});
 }
@@ -419,7 +549,7 @@ class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState>
       suggestions: null == suggestions
           ? _value.suggestions
           : suggestions // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<SuggestionEntity>,
       results: null == results
           ? _value.results
           : results // ignore: cast_nullable_to_non_nullable
@@ -442,7 +572,7 @@ abstract class _$$_SearchStateCopyWith<$Res>
   @useResult
   $Res call(
       {FormzStatus status,
-      List<String> suggestions,
+      List<SuggestionEntity> suggestions,
       List<RecipeEntity> results,
       String errorMessage});
 }
@@ -471,7 +601,7 @@ class __$$_SearchStateCopyWithImpl<$Res>
       suggestions: null == suggestions
           ? _value._suggestions
           : suggestions // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<SuggestionEntity>,
       results: null == results
           ? _value._results
           : results // ignore: cast_nullable_to_non_nullable
@@ -489,7 +619,7 @@ class __$$_SearchStateCopyWithImpl<$Res>
 class _$_SearchState implements _SearchState {
   const _$_SearchState(
       {this.status = FormzStatus.pure,
-      final List<String> suggestions = const [],
+      final List<SuggestionEntity> suggestions = const [],
       final List<RecipeEntity> results = const [],
       this.errorMessage = ''})
       : _suggestions = suggestions,
@@ -498,10 +628,10 @@ class _$_SearchState implements _SearchState {
   @override
   @JsonKey()
   final FormzStatus status;
-  final List<String> _suggestions;
+  final List<SuggestionEntity> _suggestions;
   @override
   @JsonKey()
-  List<String> get suggestions {
+  List<SuggestionEntity> get suggestions {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_suggestions);
   }
@@ -554,14 +684,14 @@ class _$_SearchState implements _SearchState {
 abstract class _SearchState implements SearchState {
   const factory _SearchState(
       {final FormzStatus status,
-      final List<String> suggestions,
+      final List<SuggestionEntity> suggestions,
       final List<RecipeEntity> results,
       final String errorMessage}) = _$_SearchState;
 
   @override
   FormzStatus get status;
   @override
-  List<String> get suggestions;
+  List<SuggestionEntity> get suggestions;
   @override
   List<RecipeEntity> get results;
   @override

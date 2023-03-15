@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:remote_recipe/features/search/domain/entity/suggestion.dart';
 
 import '../../../assets/colors/colors.dart';
 import '../../../core/models/formz/formz_status.dart';
@@ -25,13 +26,13 @@ class SearchPage extends StatelessWidget {
               preferredSize: const Size.fromHeight(50),
               child: BlocBuilder<SearchBloc, SearchState>(
                 builder: (context, state) {
-                  return Autocomplete(
+                  return Autocomplete<SuggestionEntity>(
                     optionsBuilder: (TextEditingValue textEditingValue) async {
                       context.read<SearchBloc>().add(
                           SearchEvent.getSuggestions(textEditingValue.text));
 
                       if (textEditingValue.text.isEmpty) {
-                        return const Iterable<String>.empty();
+                        return const Iterable<SuggestionEntity>.empty();
                       }
 
                       await Future.delayed(const Duration(seconds: 2));
@@ -40,10 +41,10 @@ class SearchPage extends StatelessWidget {
                           context.read<SearchBloc>().state.suggestions;
                       return result;
                     },
-                    onSelected: (String selection) {
+                    onSelected: (selection) {
                       context
                           .read<SearchBloc>()
-                          .add(SearchEvent.getResults(selection));
+                          .add(SearchEvent.getSuggestionResult(selection.id));
                     },
                     fieldViewBuilder: (_, textEditingController, focusNode,
                             onFieldSubmitted) =>
