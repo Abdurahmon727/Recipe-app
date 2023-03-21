@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:remote_recipe/features/favourites/presentation/favourites_page.dart';
 import 'package:remote_recipe/features/home/presentation/home_page.dart';
+import 'package:remote_recipe/features/profile/presentation/profile_page.dart';
 import 'package:remote_recipe/features/search/presentation/search_page.dart';
 
 import '../navbar/nav_item_enum.dart';
@@ -35,7 +36,7 @@ class _TabNavigatorState extends State<TabNavigator>
         };
       case NavItemEnum.search:
         return {
-          TabNavigatorRoutes.root: (context) => SearchPage(),
+          TabNavigatorRoutes.root: (context) => const SearchPage(),
         };
       case NavItemEnum.favourites:
         return {
@@ -43,7 +44,7 @@ class _TabNavigatorState extends State<TabNavigator>
         };
       case NavItemEnum.account:
         return {
-          TabNavigatorRoutes.root: (context) => const SizedBox(),
+          TabNavigatorRoutes.root: (context) => const ProfilePage(),
         };
 
       default:

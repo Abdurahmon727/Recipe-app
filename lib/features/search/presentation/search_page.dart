@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:remote_recipe/features/search/domain/entity/suggestion.dart';
 
@@ -26,7 +27,53 @@ class SearchPage extends StatelessWidget {
               preferredSize: const Size.fromHeight(50),
               child: BlocBuilder<SearchBloc, SearchState>(
                 builder: (context, state) {
-                  return Autocomplete<SuggestionEntity>(
+                  return Autocomplete(
+                    displayStringForOption: (option) => option.title,
+                    optionsViewBuilder: (context, onSelected, options) {
+                      return Align(
+                        alignment: Alignment.topLeft,
+                        child: Material(
+                          elevation: 2,
+                          child: ConstrainedBox(
+                            constraints: const BoxConstraints(maxHeight: 500),
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: options.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                final option = options.elementAt(index);
+                                return InkWell(
+                                  onTap: () {
+                                    onSelected(option);
+                                  },
+                                  child:
+                                      Builder(builder: (BuildContext context) {
+                                    final bool highlight =
+                                        AutocompleteHighlightedOption.of(
+                                                context) ==
+                                            index;
+                                    if (highlight) {
+                                      SchedulerBinding.instance
+                                          .addPostFrameCallback(
+                                              (Duration timeStamp) {
+                                        Scrollable.ensureVisible(context,
+                                            alignment: 0.5);
+                                      });
+                                    }
+                                    return Container(
+                                      color: highlight
+                                          ? Theme.of(context).focusColor
+                                          : null,
+                                      padding: const EdgeInsets.all(16.0),
+                                      child: Text(option.title),
+                                    );
+                                  }),
+                                );
+                              },
+                            ),
+                          ),
+                        ),
+                      );
+                    },
                     optionsBuilder: (TextEditingValue textEditingValue) async {
                       context.read<SearchBloc>().add(
                           SearchEvent.getSuggestions(textEditingValue.text));

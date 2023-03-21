@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "77153589999",
+    "project_id": "recipe-43c24",
+    "storage_bucket": "recipe-43c24.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:77153589999:android:e6c20869be12ccd694d91a",
+        "android_client_info": {
+          "package_name": "com.example.remote_recipe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "77153589999-1d5nlr1u0puo26u8kfp4moss29hlo21l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0mvNNYk7XiuNyUQyHwcW4dwDa_iQvCg8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "77153589999-1d5nlr1u0puo26u8kfp4moss29hlo21l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
