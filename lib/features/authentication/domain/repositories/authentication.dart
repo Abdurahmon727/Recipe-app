@@ -8,8 +8,6 @@ import '../usecases/login.dart';
 import '../usecases/register.dart';
 
 abstract class AuthenticationRepository {
-  final controller = StreamController<AuthenticationStatus>();
-
   Stream<AuthenticationStatus> get status;
 
   Future<Either<ServerFailure, void>> loginViaEmail({
@@ -19,8 +17,9 @@ abstract class AuthenticationRepository {
 
   Future<Either<ServerFailure, void>> verifyEmail({required String email});
 
-  Future<Either<ServerFailure, EmailServerCredentials>> registerViaEmail({
-    required RegisterEmailCredentials credentials,
+  Future<Either<ServerFailure, void>> registerViaEmail({
+    required String emailAddress,
+    required String password,
   });
 
   Future<Either<ServerFailure, AuthenticatedUser>> getProfile();

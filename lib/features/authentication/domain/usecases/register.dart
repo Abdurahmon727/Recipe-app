@@ -4,17 +4,16 @@ import '../../../../core/error/failure.dart';
 import '../../../../core/usecases/usecase.dart';
 import '../repositories/authentication.dart';
 
-class RegisterationUseCase
-    implements UseCase<ServerCredentials, RegisterationParams> {
+class RegisterationUseCase implements UseCase<void, RegisterationParams> {
   final AuthenticationRepository repository;
 
   const RegisterationUseCase(this.repository);
 
   @override
-  Future<Either<ServerFailure, ServerCredentials>> call(
-      RegisterationParams params) async {
+  Future<Either<ServerFailure, void>> call(RegisterationParams params) async {
     if (params is RegisterEmailCredentials) {
-      return await repository.registerViaEmail(credentials: params);
+      return await repository.registerViaEmail(
+          emailAddress: params.email, password: params.email);
     } else {
       throw ServerException(statusMessage: 'No such method', statusCode: 141);
     }
