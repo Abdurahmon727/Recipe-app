@@ -3,11 +3,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:remote_recipe/features/bottom_navigation_bar/bottom_nav_bar.dart';
 
 import 'assets/colors/colors.dart';
 import 'core/data/service_locator.dart';
-import 'core/navigator.dart';
+import 'features/auth/presentation/bloc/auth_bloc.dart';
+import 'features/auth/presentation/pages/sign_in_number.dart';
 import 'features/favourites/presentation/bloc/favourites_bloc.dart';
 
 Future<void> main() async {
@@ -41,11 +41,18 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<FavouritesBloc>(
-      create: (context) => serviceLocator<FavouritesBloc>()
-        ..add(const FavouritesEvent.getRecipes()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<FavouritesBloc>(
+          create: (context) => serviceLocator<FavouritesBloc>()
+            ..add(const FavouritesEvent.getRecipes()),
+        ),
+        BlocProvider(
+          create: (context) => AuthBloc(),
+        ),
+      ],
       child: MaterialApp(
-        home: BottomNavBar(),
+        home: SignInNumber(),
         title: 'Recipe App',
         theme: ThemeData(
           fontFamily: 'DM Sans',
