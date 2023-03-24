@@ -1,6 +1,9 @@
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
 abstract class AppFunctions {
   static String? encodeQueryParameters(Map<String, String> params) {
     return params.entries
@@ -14,6 +17,13 @@ abstract class AppFunctions {
     await File(path).writeAsBytes(
       buffer.asUint8List(data.offsetInBytes, data.lengthInBytes),
     );
+  }
+
+  static void showSnackbar(BuildContext context, String text) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(text),
+      duration: const Duration(seconds: 2),
+    ));
   }
 
   static bool isImage(String path) {

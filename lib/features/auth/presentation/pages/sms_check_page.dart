@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
+import 'package:sms_autofill/sms_autofill.dart';
+
+import '../../../../assets/colors/colors.dart';
 
 class SmsChechPage extends StatelessWidget {
   final controller = MaskedTextController(mask: '000000');
+  final smsTextFieldKey = GlobalKey<FormState>();
 
   SmsChechPage({super.key});
   @override
@@ -27,57 +31,58 @@ class SmsChechPage extends StatelessWidget {
                       )),
                 ),
                 Center(
-                  child: Column(children: [
-                    Text(
-                      'Enter Sms code',
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                        margin: const EdgeInsets.all(5),
-                        padding: const EdgeInsets.symmetric(horizontal: 5),
-                        height: 50,
-                        decoration: BoxDecoration(
-                            border: Border.all(),
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(5))),
-                        child: TextField(
-                          controller: controller,
-                          decoration: const InputDecoration(
-                              border: InputBorder.none, hintText: 'sms code'),
-                          keyboardType: TextInputType.number,
-                          onChanged: (value) {},
-                        )),
-                    // Visibility(
-                    //     visible: Provider.of<SignInProvider>(context).isFailSms,
-                    //     child: Padding(
-                    //       padding: const EdgeInsets.symmetric(horizontal: 5),
-                    //       child: Text(
-                    //         Provider.of<SignInProvider>(context).exceptionSms,
-                    //         textAlign: TextAlign.left,
-                    //         style: const TextStyle(color: Colors.red),
-                    //       ),
-                    //     )),
-                    GestureDetector(
-                      onTap: () {
-                        //TODO
-                      },
-                      child: Container(
-                        margin: const EdgeInsets.all(8),
-                        decoration: const BoxDecoration(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(30))),
-                        width: double.infinity,
-                        height: 60,
-                        child: Center(
-                          child: Text(
-                            'Sign in',
+                  child: Form(
+                    key: smsTextFieldKey,
+                    child: Column(children: [
+                      const Text(
+                        'Enter Sms code',
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      TextFieldPinAutoFill(
+                        autoFocus: true,
+                        onCodeSubmitted: (p0) {
+                          //TODO
+                        },
+                        decoration: const InputDecoration(
+                          border: InputBorder.none,
+                          hintText: 'sms code',
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(15)),
+                            borderSide: BorderSide(color: Colors.red, width: 2),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(15)),
+                              borderSide: BorderSide(color: orange, width: 2)),
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(15)),
+                              borderSide: BorderSide(color: orange, width: 2)),
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      GestureDetector(
+                        onTap: () {
+                          //TODO
+                        },
+                        child: Container(
+                          decoration: const BoxDecoration(
+                              color: orange,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(15))),
+                          width: double.infinity,
+                          height: 60,
+                          child: const Center(
+                            child: Text(
+                              'Sign in',
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ]),
+                    ]),
+                  ),
                 ),
               ]),
         ),

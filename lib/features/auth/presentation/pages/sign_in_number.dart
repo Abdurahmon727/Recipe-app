@@ -1,36 +1,29 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
-import 'package:remote_recipe/assets/colors/colors.dart';
+import 'package:remote_recipe/core/app_functions.dart';
 
-class SignInNumber extends StatelessWidget {
+import '../../../../assets/colors/colors.dart';
+import '../../../bottom_navigation_bar/widgets/navigator.dart';
+import '../bloc/auth_bloc.dart';
+import 'sms_check_page.dart';
+
+class SignInNumberPage extends StatelessWidget {
   final controller = MaskedTextController(mask: '(00) 000 00 00');
   final textFieldKey = GlobalKey<FormState>();
 
-  SignInNumber({super.key});
+  SignInNumberPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(8),
           child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: const SizedBox(
-                      width: 50,
-                      height: 50,
-                      child: Icon(
-                        Icons.keyboard_backspace,
-                      )),
-                ),
                 Center(
                   child: Form(
                     key: textFieldKey,
@@ -58,6 +51,11 @@ class SignInNumber extends StatelessWidget {
                               '+998 ',
                               style: TextStyle(color: Colors.black),
                             ),
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(15)),
+                                borderSide:
+                                    BorderSide(color: orange, width: 2)),
                             focusedErrorBorder: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(15)),
@@ -76,7 +74,15 @@ class SignInNumber extends StatelessWidget {
                       const SizedBox(height: 10),
                       GestureDetector(
                         onTap: () async {
-                          textFieldKey.currentState?.validate();
+                          final isOk = textFieldKey.currentState?.validate();
+                          if (isOk ?? false) {
+                            context.read<AuthBloc>().add(AuthEvent.signIn(
+                                phoneNumber: '+998 ${controller.text}',
+                                onFailure: (value) {
+                                  AppFunctions.showSnackbar(context, value);
+                                }));
+                            Navigator.push(context, fade(page: SmsChechPage()));
+                          }
                         },
                         child: Container(
                           decoration: const BoxDecoration(

@@ -3,6 +3,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:remote_recipe/core/models/authentication_status.dart';
+import 'package:remote_recipe/features/bottom_navigation_bar/bottom_nav_bar.dart';
+import 'package:remote_recipe/features/bottom_navigation_bar/widgets/navigator.dart';
+import 'package:remote_recipe/features/profile/presentation/profile_page.dart';
 
 import 'assets/colors/colors.dart';
 import 'core/data/service_locator.dart';
@@ -28,10 +32,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   late final user;
 
-  void initDynamicLink() async {
-    FirebaseDynamicLinks.instance.onLink;
-  }
-
   @override
   void initState() {
     user = FirebaseAuth.instance.authStateChanges();
@@ -48,16 +48,28 @@ class _MyAppState extends State<MyApp> {
             ..add(const FavouritesEvent.getRecipes()),
         ),
         BlocProvider(
-          create: (context) => AuthBloc(),
+          create: (context) => AuthBloc(user != null),
         ),
       ],
       child: MaterialApp(
-        home: SignInNumber(),
         title: 'Recipe App',
         theme: ThemeData(
           fontFamily: 'DM Sans',
           primaryColor: orange,
           splashColor: orange.withOpacity(0.1),
+        ),
+        home: SignInNumberPage(),
+        builder: (context, child) => BlocListener<AuthBloc, AuthState>(
+          listener: (context, state) {
+            if (state.authStatus == AuthenticationStatus.authenticated) {
+              Navigator.pushAndRemoveUntil(
+                  context, fade(page: const BottomNavBar()), (route) => false);
+            } else {
+              Navigator.pushAndRemoveUntil(
+                  context, fade(page: SignInNumberPage()), (route) => false);
+            }
+          },
+          child: child,
         ),
       ),
     );
