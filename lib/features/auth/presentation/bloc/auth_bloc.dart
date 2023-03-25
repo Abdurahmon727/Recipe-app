@@ -3,13 +3,12 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:remote_recipe/core/usecases/usecase.dart';
-import 'package:remote_recipe/features/auth/domain/usecase/log_out.dart';
 
-import '../../../../core/data/service_locator.dart';
 import '../../../../core/models/authentication_status.dart';
+import '../../../../core/usecases/usecase.dart';
 import '../../domain/repository/auth_repo.dart';
 import '../../domain/usecase/check_code.dart';
+import '../../domain/usecase/log_out.dart';
 import '../../domain/usecase/sent_code.dart';
 
 part 'auth_bloc.freezed.dart';
@@ -18,11 +17,12 @@ part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository _repository;
-  late StreamSubscription<AuthenticationStatus>
-      _authenticationStatusSubscription;
+ 
+
   AuthBloc(AuthRepository repository)
       : _repository = repository,
-        super(_AuthState()) {
+        super(const _AuthState()) {
+   
     on<_SignIn>((event, emit) async {
       final usecase = SentCodeUseCase(_repository);
       final result = await usecase.call(event.phoneNumber);
@@ -46,11 +46,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<_ChangedStatus>((event, emit) {
       emit(state.copyWith(authStatus: event.status));
     });
-    _authenticationStatusSubscription = _repository.status.listen(
-      (status) {
-        add(AuthEvent.changedStatus(status: status));
-      },
-    );
+
     on<_LogOut>((event, emit) async {
       final usecase = LogOutUseCase(_repository);
       final result = await usecase.call(NoParams());

@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:remote_recipe/core/models/authentication_status.dart';
 
 import '../../../../core/data/either.dart';
 import '../../../../core/data/network_info.dart';
@@ -10,16 +9,6 @@ String _id = '';
 
 class AuthRepositoryImpl extends AuthRepository {
   final NetworkInfo _networkInfo = const NetworkInfoImpl();
-  @override
-  Stream<AuthenticationStatus> get status async* {
-    final user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      print('HAVE ACCOUNT');
-      yield AuthenticationStatus.authenticated;
-    }
-    yield AuthenticationStatus.unauthenticated;
-    yield* controller.stream;
-  }
 
   @override
   Future<Either<ServerFailure, void>> signIn(String phoneNumber) async {
