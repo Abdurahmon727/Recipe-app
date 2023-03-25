@@ -16,33 +16,40 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AuthEvent {
-  ValueChanged<String> get onFailure => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            String phoneNumber, ValueChanged<String> onFailure)
+    required TResult Function(String phoneNumber,
+            ValueChanged<String> onFailure, ValueChanged<String> onSuccess)
         signIn,
-    required TResult Function(String smsCode, ValueChanged<String> onFailure,
-            VoidCallback onSuccess, dynamic required)
+    required TResult Function(
+            String smsCode, ValueChanged<String> onFailure, dynamic required)
         checkSms,
+    required TResult Function(AuthenticationStatus status) changedStatus,
+    required TResult Function(ValueChanged<String> onFailure) logOut,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String phoneNumber, ValueChanged<String> onFailure)?
+    TResult? Function(String phoneNumber, ValueChanged<String> onFailure,
+            ValueChanged<String> onSuccess)?
         signIn,
-    TResult? Function(String smsCode, ValueChanged<String> onFailure,
-            VoidCallback onSuccess, dynamic required)?
+    TResult? Function(
+            String smsCode, ValueChanged<String> onFailure, dynamic required)?
         checkSms,
+    TResult? Function(AuthenticationStatus status)? changedStatus,
+    TResult? Function(ValueChanged<String> onFailure)? logOut,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String phoneNumber, ValueChanged<String> onFailure)?
+    TResult Function(String phoneNumber, ValueChanged<String> onFailure,
+            ValueChanged<String> onSuccess)?
         signIn,
-    TResult Function(String smsCode, ValueChanged<String> onFailure,
-            VoidCallback onSuccess, dynamic required)?
+    TResult Function(
+            String smsCode, ValueChanged<String> onFailure, dynamic required)?
         checkSms,
+    TResult Function(AuthenticationStatus status)? changedStatus,
+    TResult Function(ValueChanged<String> onFailure)? logOut,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -50,24 +57,26 @@ mixin _$AuthEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_SignIn value) signIn,
     required TResult Function(_CheckSms value) checkSms,
+    required TResult Function(_ChangedStatus value) changedStatus,
+    required TResult Function(_LogOut value) logOut,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_SignIn value)? signIn,
     TResult? Function(_CheckSms value)? checkSms,
+    TResult? Function(_ChangedStatus value)? changedStatus,
+    TResult? Function(_LogOut value)? logOut,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_SignIn value)? signIn,
     TResult Function(_CheckSms value)? checkSms,
+    TResult Function(_ChangedStatus value)? changedStatus,
+    TResult Function(_LogOut value)? logOut,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $AuthEventCopyWith<AuthEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -75,8 +84,6 @@ mixin _$AuthEvent {
 abstract class $AuthEventCopyWith<$Res> {
   factory $AuthEventCopyWith(AuthEvent value, $Res Function(AuthEvent) then) =
       _$AuthEventCopyWithImpl<$Res, AuthEvent>;
-  @useResult
-  $Res call({ValueChanged<String> onFailure});
 }
 
 /// @nodoc
@@ -88,28 +95,17 @@ class _$AuthEventCopyWithImpl<$Res, $Val extends AuthEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? onFailure = null,
-  }) {
-    return _then(_value.copyWith(
-      onFailure: null == onFailure
-          ? _value.onFailure
-          : onFailure // ignore: cast_nullable_to_non_nullable
-              as ValueChanged<String>,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$_SignInCopyWith<$Res> implements $AuthEventCopyWith<$Res> {
+abstract class _$$_SignInCopyWith<$Res> {
   factory _$$_SignInCopyWith(_$_SignIn value, $Res Function(_$_SignIn) then) =
       __$$_SignInCopyWithImpl<$Res>;
-  @override
   @useResult
-  $Res call({String phoneNumber, ValueChanged<String> onFailure});
+  $Res call(
+      {String phoneNumber,
+      ValueChanged<String> onFailure,
+      ValueChanged<String> onSuccess});
 }
 
 /// @nodoc
@@ -124,6 +120,7 @@ class __$$_SignInCopyWithImpl<$Res>
   $Res call({
     Object? phoneNumber = null,
     Object? onFailure = null,
+    Object? onSuccess = null,
   }) {
     return _then(_$_SignIn(
       phoneNumber: null == phoneNumber
@@ -134,6 +131,10 @@ class __$$_SignInCopyWithImpl<$Res>
           ? _value.onFailure
           : onFailure // ignore: cast_nullable_to_non_nullable
               as ValueChanged<String>,
+      onSuccess: null == onSuccess
+          ? _value.onSuccess
+          : onSuccess // ignore: cast_nullable_to_non_nullable
+              as ValueChanged<String>,
     ));
   }
 }
@@ -141,16 +142,21 @@ class __$$_SignInCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_SignIn implements _SignIn {
-  const _$_SignIn({required this.phoneNumber, required this.onFailure});
+  const _$_SignIn(
+      {required this.phoneNumber,
+      required this.onFailure,
+      required this.onSuccess});
 
   @override
   final String phoneNumber;
   @override
   final ValueChanged<String> onFailure;
+  @override
+  final ValueChanged<String> onSuccess;
 
   @override
   String toString() {
-    return 'AuthEvent.signIn(phoneNumber: $phoneNumber, onFailure: $onFailure)';
+    return 'AuthEvent.signIn(phoneNumber: $phoneNumber, onFailure: $onFailure, onSuccess: $onSuccess)';
   }
 
   @override
@@ -161,11 +167,14 @@ class _$_SignIn implements _SignIn {
             (identical(other.phoneNumber, phoneNumber) ||
                 other.phoneNumber == phoneNumber) &&
             (identical(other.onFailure, onFailure) ||
-                other.onFailure == onFailure));
+                other.onFailure == onFailure) &&
+            (identical(other.onSuccess, onSuccess) ||
+                other.onSuccess == onSuccess));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, phoneNumber, onFailure);
+  int get hashCode =>
+      Object.hash(runtimeType, phoneNumber, onFailure, onSuccess);
 
   @JsonKey(ignore: true)
   @override
@@ -176,40 +185,48 @@ class _$_SignIn implements _SignIn {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            String phoneNumber, ValueChanged<String> onFailure)
+    required TResult Function(String phoneNumber,
+            ValueChanged<String> onFailure, ValueChanged<String> onSuccess)
         signIn,
-    required TResult Function(String smsCode, ValueChanged<String> onFailure,
-            VoidCallback onSuccess, dynamic required)
+    required TResult Function(
+            String smsCode, ValueChanged<String> onFailure, dynamic required)
         checkSms,
+    required TResult Function(AuthenticationStatus status) changedStatus,
+    required TResult Function(ValueChanged<String> onFailure) logOut,
   }) {
-    return signIn(phoneNumber, onFailure);
+    return signIn(phoneNumber, onFailure, onSuccess);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String phoneNumber, ValueChanged<String> onFailure)?
+    TResult? Function(String phoneNumber, ValueChanged<String> onFailure,
+            ValueChanged<String> onSuccess)?
         signIn,
-    TResult? Function(String smsCode, ValueChanged<String> onFailure,
-            VoidCallback onSuccess, dynamic required)?
+    TResult? Function(
+            String smsCode, ValueChanged<String> onFailure, dynamic required)?
         checkSms,
+    TResult? Function(AuthenticationStatus status)? changedStatus,
+    TResult? Function(ValueChanged<String> onFailure)? logOut,
   }) {
-    return signIn?.call(phoneNumber, onFailure);
+    return signIn?.call(phoneNumber, onFailure, onSuccess);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String phoneNumber, ValueChanged<String> onFailure)?
+    TResult Function(String phoneNumber, ValueChanged<String> onFailure,
+            ValueChanged<String> onSuccess)?
         signIn,
-    TResult Function(String smsCode, ValueChanged<String> onFailure,
-            VoidCallback onSuccess, dynamic required)?
+    TResult Function(
+            String smsCode, ValueChanged<String> onFailure, dynamic required)?
         checkSms,
+    TResult Function(AuthenticationStatus status)? changedStatus,
+    TResult Function(ValueChanged<String> onFailure)? logOut,
     required TResult orElse(),
   }) {
     if (signIn != null) {
-      return signIn(phoneNumber, onFailure);
+      return signIn(phoneNumber, onFailure, onSuccess);
     }
     return orElse();
   }
@@ -219,6 +236,8 @@ class _$_SignIn implements _SignIn {
   TResult map<TResult extends Object?>({
     required TResult Function(_SignIn value) signIn,
     required TResult Function(_CheckSms value) checkSms,
+    required TResult Function(_ChangedStatus value) changedStatus,
+    required TResult Function(_LogOut value) logOut,
   }) {
     return signIn(this);
   }
@@ -228,6 +247,8 @@ class _$_SignIn implements _SignIn {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_SignIn value)? signIn,
     TResult? Function(_CheckSms value)? checkSms,
+    TResult? Function(_ChangedStatus value)? changedStatus,
+    TResult? Function(_LogOut value)? logOut,
   }) {
     return signIn?.call(this);
   }
@@ -237,6 +258,8 @@ class _$_SignIn implements _SignIn {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_SignIn value)? signIn,
     TResult Function(_CheckSms value)? checkSms,
+    TResult Function(_ChangedStatus value)? changedStatus,
+    TResult Function(_LogOut value)? logOut,
     required TResult orElse(),
   }) {
     if (signIn != null) {
@@ -249,29 +272,24 @@ class _$_SignIn implements _SignIn {
 abstract class _SignIn implements AuthEvent {
   const factory _SignIn(
       {required final String phoneNumber,
-      required final ValueChanged<String> onFailure}) = _$_SignIn;
+      required final ValueChanged<String> onFailure,
+      required final ValueChanged<String> onSuccess}) = _$_SignIn;
 
   String get phoneNumber;
-  @override
   ValueChanged<String> get onFailure;
-  @override
+  ValueChanged<String> get onSuccess;
   @JsonKey(ignore: true)
   _$$_SignInCopyWith<_$_SignIn> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_CheckSmsCopyWith<$Res> implements $AuthEventCopyWith<$Res> {
+abstract class _$$_CheckSmsCopyWith<$Res> {
   factory _$$_CheckSmsCopyWith(
           _$_CheckSms value, $Res Function(_$_CheckSms) then) =
       __$$_CheckSmsCopyWithImpl<$Res>;
-  @override
   @useResult
-  $Res call(
-      {String smsCode,
-      ValueChanged<String> onFailure,
-      VoidCallback onSuccess,
-      dynamic required});
+  $Res call({String smsCode, ValueChanged<String> onFailure, dynamic required});
 }
 
 /// @nodoc
@@ -287,7 +305,6 @@ class __$$_CheckSmsCopyWithImpl<$Res>
   $Res call({
     Object? smsCode = null,
     Object? onFailure = null,
-    Object? onSuccess = null,
     Object? required = null,
   }) {
     return _then(_$_CheckSms(
@@ -299,10 +316,6 @@ class __$$_CheckSmsCopyWithImpl<$Res>
           ? _value.onFailure
           : onFailure // ignore: cast_nullable_to_non_nullable
               as ValueChanged<String>,
-      onSuccess: null == onSuccess
-          ? _value.onSuccess
-          : onSuccess // ignore: cast_nullable_to_non_nullable
-              as VoidCallback,
       required: null == required ? _value.required : required,
     ));
   }
@@ -312,23 +325,18 @@ class __$$_CheckSmsCopyWithImpl<$Res>
 
 class _$_CheckSms implements _CheckSms {
   const _$_CheckSms(
-      {required this.smsCode,
-      required this.onFailure,
-      required this.onSuccess,
-      this.required});
+      {required this.smsCode, required this.onFailure, this.required});
 
   @override
   final String smsCode;
   @override
   final ValueChanged<String> onFailure;
   @override
-  final VoidCallback onSuccess;
-  @override
   final dynamic required;
 
   @override
   String toString() {
-    return 'AuthEvent.checkSms(smsCode: $smsCode, onFailure: $onFailure, onSuccess: $onSuccess, required: $required)';
+    return 'AuthEvent.checkSms(smsCode: $smsCode, onFailure: $onFailure, required: $required)';
   }
 
   @override
@@ -339,13 +347,11 @@ class _$_CheckSms implements _CheckSms {
             (identical(other.smsCode, smsCode) || other.smsCode == smsCode) &&
             (identical(other.onFailure, onFailure) ||
                 other.onFailure == onFailure) &&
-            (identical(other.onSuccess, onSuccess) ||
-                other.onSuccess == onSuccess) &&
             const DeepCollectionEquality().equals(other.required, required));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, smsCode, onFailure, onSuccess,
+  int get hashCode => Object.hash(runtimeType, smsCode, onFailure,
       const DeepCollectionEquality().hash(required));
 
   @JsonKey(ignore: true)
@@ -357,40 +363,48 @@ class _$_CheckSms implements _CheckSms {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            String phoneNumber, ValueChanged<String> onFailure)
+    required TResult Function(String phoneNumber,
+            ValueChanged<String> onFailure, ValueChanged<String> onSuccess)
         signIn,
-    required TResult Function(String smsCode, ValueChanged<String> onFailure,
-            VoidCallback onSuccess, dynamic required)
+    required TResult Function(
+            String smsCode, ValueChanged<String> onFailure, dynamic required)
         checkSms,
+    required TResult Function(AuthenticationStatus status) changedStatus,
+    required TResult Function(ValueChanged<String> onFailure) logOut,
   }) {
-    return checkSms(smsCode, onFailure, onSuccess, required);
+    return checkSms(smsCode, onFailure, required);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String phoneNumber, ValueChanged<String> onFailure)?
+    TResult? Function(String phoneNumber, ValueChanged<String> onFailure,
+            ValueChanged<String> onSuccess)?
         signIn,
-    TResult? Function(String smsCode, ValueChanged<String> onFailure,
-            VoidCallback onSuccess, dynamic required)?
+    TResult? Function(
+            String smsCode, ValueChanged<String> onFailure, dynamic required)?
         checkSms,
+    TResult? Function(AuthenticationStatus status)? changedStatus,
+    TResult? Function(ValueChanged<String> onFailure)? logOut,
   }) {
-    return checkSms?.call(smsCode, onFailure, onSuccess, required);
+    return checkSms?.call(smsCode, onFailure, required);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String phoneNumber, ValueChanged<String> onFailure)?
+    TResult Function(String phoneNumber, ValueChanged<String> onFailure,
+            ValueChanged<String> onSuccess)?
         signIn,
-    TResult Function(String smsCode, ValueChanged<String> onFailure,
-            VoidCallback onSuccess, dynamic required)?
+    TResult Function(
+            String smsCode, ValueChanged<String> onFailure, dynamic required)?
         checkSms,
+    TResult Function(AuthenticationStatus status)? changedStatus,
+    TResult Function(ValueChanged<String> onFailure)? logOut,
     required TResult orElse(),
   }) {
     if (checkSms != null) {
-      return checkSms(smsCode, onFailure, onSuccess, required);
+      return checkSms(smsCode, onFailure, required);
     }
     return orElse();
   }
@@ -400,6 +414,8 @@ class _$_CheckSms implements _CheckSms {
   TResult map<TResult extends Object?>({
     required TResult Function(_SignIn value) signIn,
     required TResult Function(_CheckSms value) checkSms,
+    required TResult Function(_ChangedStatus value) changedStatus,
+    required TResult Function(_LogOut value) logOut,
   }) {
     return checkSms(this);
   }
@@ -409,6 +425,8 @@ class _$_CheckSms implements _CheckSms {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_SignIn value)? signIn,
     TResult? Function(_CheckSms value)? checkSms,
+    TResult? Function(_ChangedStatus value)? changedStatus,
+    TResult? Function(_LogOut value)? logOut,
   }) {
     return checkSms?.call(this);
   }
@@ -418,6 +436,8 @@ class _$_CheckSms implements _CheckSms {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_SignIn value)? signIn,
     TResult Function(_CheckSms value)? checkSms,
+    TResult Function(_ChangedStatus value)? changedStatus,
+    TResult Function(_LogOut value)? logOut,
     required TResult orElse(),
   }) {
     if (checkSms != null) {
@@ -431,17 +451,328 @@ abstract class _CheckSms implements AuthEvent {
   const factory _CheckSms(
       {required final String smsCode,
       required final ValueChanged<String> onFailure,
-      required final VoidCallback onSuccess,
       final dynamic required}) = _$_CheckSms;
 
   String get smsCode;
-  @override
   ValueChanged<String> get onFailure;
-  VoidCallback get onSuccess;
   dynamic get required;
-  @override
   @JsonKey(ignore: true)
   _$$_CheckSmsCopyWith<_$_CheckSms> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_ChangedStatusCopyWith<$Res> {
+  factory _$$_ChangedStatusCopyWith(
+          _$_ChangedStatus value, $Res Function(_$_ChangedStatus) then) =
+      __$$_ChangedStatusCopyWithImpl<$Res>;
+  @useResult
+  $Res call({AuthenticationStatus status});
+}
+
+/// @nodoc
+class __$$_ChangedStatusCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$_ChangedStatus>
+    implements _$$_ChangedStatusCopyWith<$Res> {
+  __$$_ChangedStatusCopyWithImpl(
+      _$_ChangedStatus _value, $Res Function(_$_ChangedStatus) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? status = null,
+  }) {
+    return _then(_$_ChangedStatus(
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as AuthenticationStatus,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ChangedStatus implements _ChangedStatus {
+  const _$_ChangedStatus({required this.status});
+
+  @override
+  final AuthenticationStatus status;
+
+  @override
+  String toString() {
+    return 'AuthEvent.changedStatus(status: $status)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ChangedStatus &&
+            (identical(other.status, status) || other.status == status));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, status);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ChangedStatusCopyWith<_$_ChangedStatus> get copyWith =>
+      __$$_ChangedStatusCopyWithImpl<_$_ChangedStatus>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String phoneNumber,
+            ValueChanged<String> onFailure, ValueChanged<String> onSuccess)
+        signIn,
+    required TResult Function(
+            String smsCode, ValueChanged<String> onFailure, dynamic required)
+        checkSms,
+    required TResult Function(AuthenticationStatus status) changedStatus,
+    required TResult Function(ValueChanged<String> onFailure) logOut,
+  }) {
+    return changedStatus(status);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String phoneNumber, ValueChanged<String> onFailure,
+            ValueChanged<String> onSuccess)?
+        signIn,
+    TResult? Function(
+            String smsCode, ValueChanged<String> onFailure, dynamic required)?
+        checkSms,
+    TResult? Function(AuthenticationStatus status)? changedStatus,
+    TResult? Function(ValueChanged<String> onFailure)? logOut,
+  }) {
+    return changedStatus?.call(status);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String phoneNumber, ValueChanged<String> onFailure,
+            ValueChanged<String> onSuccess)?
+        signIn,
+    TResult Function(
+            String smsCode, ValueChanged<String> onFailure, dynamic required)?
+        checkSms,
+    TResult Function(AuthenticationStatus status)? changedStatus,
+    TResult Function(ValueChanged<String> onFailure)? logOut,
+    required TResult orElse(),
+  }) {
+    if (changedStatus != null) {
+      return changedStatus(status);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_SignIn value) signIn,
+    required TResult Function(_CheckSms value) checkSms,
+    required TResult Function(_ChangedStatus value) changedStatus,
+    required TResult Function(_LogOut value) logOut,
+  }) {
+    return changedStatus(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_SignIn value)? signIn,
+    TResult? Function(_CheckSms value)? checkSms,
+    TResult? Function(_ChangedStatus value)? changedStatus,
+    TResult? Function(_LogOut value)? logOut,
+  }) {
+    return changedStatus?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_SignIn value)? signIn,
+    TResult Function(_CheckSms value)? checkSms,
+    TResult Function(_ChangedStatus value)? changedStatus,
+    TResult Function(_LogOut value)? logOut,
+    required TResult orElse(),
+  }) {
+    if (changedStatus != null) {
+      return changedStatus(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ChangedStatus implements AuthEvent {
+  const factory _ChangedStatus({required final AuthenticationStatus status}) =
+      _$_ChangedStatus;
+
+  AuthenticationStatus get status;
+  @JsonKey(ignore: true)
+  _$$_ChangedStatusCopyWith<_$_ChangedStatus> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_LogOutCopyWith<$Res> {
+  factory _$$_LogOutCopyWith(_$_LogOut value, $Res Function(_$_LogOut) then) =
+      __$$_LogOutCopyWithImpl<$Res>;
+  @useResult
+  $Res call({ValueChanged<String> onFailure});
+}
+
+/// @nodoc
+class __$$_LogOutCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$_LogOut>
+    implements _$$_LogOutCopyWith<$Res> {
+  __$$_LogOutCopyWithImpl(_$_LogOut _value, $Res Function(_$_LogOut) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? onFailure = null,
+  }) {
+    return _then(_$_LogOut(
+      onFailure: null == onFailure
+          ? _value.onFailure
+          : onFailure // ignore: cast_nullable_to_non_nullable
+              as ValueChanged<String>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_LogOut implements _LogOut {
+  const _$_LogOut({required this.onFailure});
+
+  @override
+  final ValueChanged<String> onFailure;
+
+  @override
+  String toString() {
+    return 'AuthEvent.logOut(onFailure: $onFailure)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_LogOut &&
+            (identical(other.onFailure, onFailure) ||
+                other.onFailure == onFailure));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, onFailure);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_LogOutCopyWith<_$_LogOut> get copyWith =>
+      __$$_LogOutCopyWithImpl<_$_LogOut>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String phoneNumber,
+            ValueChanged<String> onFailure, ValueChanged<String> onSuccess)
+        signIn,
+    required TResult Function(
+            String smsCode, ValueChanged<String> onFailure, dynamic required)
+        checkSms,
+    required TResult Function(AuthenticationStatus status) changedStatus,
+    required TResult Function(ValueChanged<String> onFailure) logOut,
+  }) {
+    return logOut(onFailure);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String phoneNumber, ValueChanged<String> onFailure,
+            ValueChanged<String> onSuccess)?
+        signIn,
+    TResult? Function(
+            String smsCode, ValueChanged<String> onFailure, dynamic required)?
+        checkSms,
+    TResult? Function(AuthenticationStatus status)? changedStatus,
+    TResult? Function(ValueChanged<String> onFailure)? logOut,
+  }) {
+    return logOut?.call(onFailure);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String phoneNumber, ValueChanged<String> onFailure,
+            ValueChanged<String> onSuccess)?
+        signIn,
+    TResult Function(
+            String smsCode, ValueChanged<String> onFailure, dynamic required)?
+        checkSms,
+    TResult Function(AuthenticationStatus status)? changedStatus,
+    TResult Function(ValueChanged<String> onFailure)? logOut,
+    required TResult orElse(),
+  }) {
+    if (logOut != null) {
+      return logOut(onFailure);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_SignIn value) signIn,
+    required TResult Function(_CheckSms value) checkSms,
+    required TResult Function(_ChangedStatus value) changedStatus,
+    required TResult Function(_LogOut value) logOut,
+  }) {
+    return logOut(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_SignIn value)? signIn,
+    TResult? Function(_CheckSms value)? checkSms,
+    TResult? Function(_ChangedStatus value)? changedStatus,
+    TResult? Function(_LogOut value)? logOut,
+  }) {
+    return logOut?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_SignIn value)? signIn,
+    TResult Function(_CheckSms value)? checkSms,
+    TResult Function(_ChangedStatus value)? changedStatus,
+    TResult Function(_LogOut value)? logOut,
+    required TResult orElse(),
+  }) {
+    if (logOut != null) {
+      return logOut(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LogOut implements AuthEvent {
+  const factory _LogOut({required final ValueChanged<String> onFailure}) =
+      _$_LogOut;
+
+  ValueChanged<String> get onFailure;
+  @JsonKey(ignore: true)
+  _$$_LogOutCopyWith<_$_LogOut> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -521,7 +852,7 @@ class __$$_AuthStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_AuthState implements _AuthState {
-  const _$_AuthState({this.authStatus = AuthenticationStatus.unauthenticated});
+  const _$_AuthState({this.authStatus = AuthenticationStatus.unknown});
 
   @override
   @JsonKey()

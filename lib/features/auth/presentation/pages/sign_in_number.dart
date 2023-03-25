@@ -77,11 +77,15 @@ class SignInNumberPage extends StatelessWidget {
                           final isOk = textFieldKey.currentState?.validate();
                           if (isOk ?? false) {
                             context.read<AuthBloc>().add(AuthEvent.signIn(
-                                phoneNumber: '+998 ${controller.text}',
-                                onFailure: (value) {
-                                  AppFunctions.showSnackbar(context, value);
-                                }));
-                            Navigator.push(context, fade(page: SmsChechPage()));
+                                  phoneNumber: '+998 ${controller.text}',
+                                  onFailure: (value) {
+                                    AppFunctions.showSnackbar(context, value);
+                                  },
+                                  onSuccess: (_) {
+                                    Navigator.push(
+                                        context, fade(page: SmsCheckPage()));
+                                  },
+                                ));
                           }
                         },
                         child: Container(

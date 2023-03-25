@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../assets/colors/colors.dart';
+
 class SplashScreen extends StatefulWidget {
-  static Route route() => MaterialPageRoute(
-        builder: (context) => const SplashScreen(),
-      );
   const SplashScreen({Key? key}) : super(key: key);
 
   @override
@@ -13,6 +12,10 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    return const Scaffold(
+        body: Center(
+            child: CircularProgressIndicator(
+      color: orange,
+    )));
   }
 }

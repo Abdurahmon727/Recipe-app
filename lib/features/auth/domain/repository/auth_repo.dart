@@ -1,7 +1,14 @@
-import 'package:remote_recipe/core/data/either.dart';
-import 'package:remote_recipe/core/error/failure.dart';
+import 'dart:async';
+
+import '../../../../core/data/either.dart';
+import '../../../../core/error/failure.dart';
+import '../../../../core/models/authentication_status.dart';
 
 abstract class AuthRepository {
-  Future<Either<ServerFailure, String>> signIn(String phoneNumber);
-  Future<Either<ServerFailure, void>> checkSms(String smsCode, String id);
+  final controller = StreamController<AuthenticationStatus>();
+
+  Stream<AuthenticationStatus> get status;
+  Future<Either<ServerFailure, void>> signIn(String phoneNumber);
+  Future<Either<ServerFailure, void>> checkSms(String smsCode);
+  Future<Either<Failure, void>> logOut();
 }
