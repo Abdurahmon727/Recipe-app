@@ -3,7 +3,7 @@ description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -20,7 +20,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.18.5 <3.0.0'
+  sdk: ">=2.18.5 <3.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -31,7 +31,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -57,17 +56,20 @@ dependencies:
   firebase_dynamic_links: ^5.0.16
   flutter_masked_text2: ^0.9.1
   sms_autofill: ^2.3.0
-  
+  objectbox: ^2.0.0
+  objectbox_flutter_libs: ^2.0.0
+  path_provider: ^2.0.14
 
 dev_dependencies:
   build_runner: ^2.1.0
+  objectbox_generator: ^2.0.0
   freezed: ^2.1.1
   json_serializable: ^6.5.4
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
 
-flutter: 
+flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
@@ -75,12 +77,9 @@ flutter:
     - assets/icons/global/
     - assets/icons/home/
     - assets/images/
-    
-    
 
   # fonts
   fonts:
     - family: DM Sans
       fonts:
         - asset: assets/fonts/TiltNeon-Regular.ttf
-        

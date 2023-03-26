@@ -11,6 +11,9 @@ class AuthRepositoryImpl extends AuthRepository {
   final NetworkInfo _networkInfo = const NetworkInfoImpl();
 
   @override
+  Stream<User?> get status => FirebaseAuth.instance.authStateChanges();
+
+  @override
   Future<Either<ServerFailure, void>> signIn(String phoneNumber) async {
     if (await _networkInfo.connected) {
       await FirebaseAuth.instance.verifyPhoneNumber(

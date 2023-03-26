@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -17,12 +18,25 @@ part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository _repository;
- 
+  late StreamSubscription<User?> _streamSubscription;
 
   AuthBloc(AuthRepository repository)
       : _repository = repository,
         super(const _AuthState()) {
-   
+    _streamSubscription = _repository.status.listen(
+      (user) {
+        print(user);
+        if (user != null &&
+            state.authStatus != AuthenticationStatus.authenticated) {
+          add(const AuthEvent.changedStatus(
+              status: AuthenticationStatus.authenticated));
+        } else if (user == null &&
+            state.authStatus != AuthenticationStatus.unauthenticated) {
+          add(const AuthEvent.changedStatus(
+              status: AuthenticationStatus.unauthenticated));
+        }
+      },
+    );
     on<_SignIn>((event, emit) async {
       final usecase = SentCodeUseCase(_repository);
       final result = await usecase.call(event.phoneNumber);

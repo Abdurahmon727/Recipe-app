@@ -1,7 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
+import 'package:objectbox/objectbox.dart';
 
+@Entity()
 class RecipeEntity extends Equatable {
+  @Id(assignable: true)
   final int id;
   final int readyInMinutes;
   final String title;

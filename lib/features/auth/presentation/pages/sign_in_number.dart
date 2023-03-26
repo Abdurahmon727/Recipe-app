@@ -83,7 +83,11 @@ class SignInNumberPage extends StatelessWidget {
                                   },
                                   onSuccess: (_) {
                                     Navigator.push(
-                                        context, fade(page: SmsCheckPage()));
+                                        context,
+                                        fade(
+                                            page: SmsCheckPage(
+                                                phoneNumber:
+                                                    '+998 ${controller.text}')));
                                   },
                                 ));
                           }
