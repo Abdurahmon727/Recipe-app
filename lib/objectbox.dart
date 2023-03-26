@@ -1,3 +1,5 @@
+import 'package:path_provider/path_provider.dart';
+import 'package:path/path.dart' as p;
 import 'features/home/domain/entity/recipe.dart';
 import 'objectbox.g.dart';
 
@@ -11,26 +13,18 @@ class ObjectBox {
   }
 
   static Future<ObjectBox> create() async {
-    final store = openStore();
+    final docsDir = await getApplicationDocumentsDirectory();
+
+    final store =
+        await openStore(directory: p.join(docsDir.path, "obx-example"));
     return ObjectBox._create(store);
   }
 
-  Stream<List<RecipeEntity>> getFavRecipes() {
-    // Query for all notes, sorted by their date.
-    // https://docs.objectbox.io/queries
-    final builder = _box.query();
-    // Build and watch the query,
-    // set triggerImmediately to emit the query immediately on listen.
-    return builder.watch(triggerImmediately: true).map((query) => query.find());
+  List<RecipeEntity> getRecipes() {
+    return _box.getAll();
   }
 
-  /// Add a note.
-  ///
-  /// To avoid frame drops, run ObjectBox operations that take longer than a
-  /// few milliseconds, e.g. putting many objects, asynchronously.
-  /// For this example only a single object is put which would also be fine if
-  /// done using [Box.put].
-  // Future<void> addNote(String text) => _box.putAsync(Note(text));
-
-  // Future<void> removeNote(int id) => _noteBox.removeAsync(id);
+  void putRecipes(List<RecipeEntity> entities) {
+    _box.putMany(entities);
+  }
 }

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pinput/pinput.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 
 import '../../../../assets/colors/colors.dart';
@@ -17,6 +18,7 @@ class SmsCheckPage extends StatefulWidget {
 }
 
 class _SmsCheckPageState extends State<SmsCheckPage> {
+  final smsInputController = TextEditingController();
   String inputtedSmsCode = '';
   late Timer timer;
   int initialSeconds = 30;
@@ -33,9 +35,9 @@ class _SmsCheckPageState extends State<SmsCheckPage> {
     });
   }
 
-  Future<void> listenForSms() async {
-    String signature = await SmsAutoFill().getAppSignature;
-    await SmsAutoFill().listenForCode();
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -73,34 +75,39 @@ class _SmsCheckPageState extends State<SmsCheckPage> {
                   const SizedBox(
                     height: 10,
                   ),
-                  TextFieldPinAutoFill(
-                    onCodeChanged: (p0) {
-                      inputtedSmsCode = p0;
-                    },
-                    autoFocus: true,
-                    onCodeSubmitted: (code) {
-                      context.read<AuthBloc>().add(AuthEvent.checkSms(
-                            smsCode: code,
-                            onFailure: (value) {
-                              AppFunctions.showSnackbar(context, value);
-                            },
-                          ));
-                    },
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'sms code',
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(15)),
-                        borderSide: BorderSide(color: Colors.red, width: 2),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(15)),
-                          borderSide: BorderSide(color: orange, width: 2)),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(15)),
-                          borderSide: BorderSide(color: orange, width: 2)),
-                    ),
+                  Pinput(
+                    androidSmsAutofillMethod: AndroidSmsAutofillMethod.none,
+                    controller: smsInputController,
                   ),
+                  // TextField(
+                  //   onChanged: (p0) {
+                  //     print(p0);
+                  //     inputtedSmsCode = p0;
+                  //   },
+                  //   autofocus: true,
+                  //   onSubmitted: (code) {
+                  //     context.read<AuthBloc>().add(AuthEvent.checkSms(
+                  //           smsCode: code,
+                  //           onFailure: (value) {
+                  //             AppFunctions.showSnackbar(context, value);
+                  //           },
+                  //         ));
+                  //   },
+                  //   decoration: const InputDecoration(
+                  //     border: InputBorder.none,
+                  //     hintText: 'sms code',
+                  //     focusedErrorBorder: OutlineInputBorder(
+                  //       borderRadius: BorderRadius.all(Radius.circular(15)),
+                  //       borderSide: BorderSide(color: Colors.red, width: 2),
+                  //     ),
+                  //     enabledBorder: OutlineInputBorder(
+                  //         borderRadius: BorderRadius.all(Radius.circular(15)),
+                  //         borderSide: BorderSide(color: orange, width: 2)),
+                  //     focusedBorder: OutlineInputBorder(
+                  //         borderRadius: BorderRadius.all(Radius.circular(15)),
+                  //         borderSide: BorderSide(color: orange, width: 2)),
+                  //   ),
+                  // ),
                   Align(
                     alignment: Alignment.bottomLeft,
                     child: secondsRemaining != 0

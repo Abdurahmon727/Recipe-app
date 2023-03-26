@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:remote_recipe/objectbox.dart';
 
 import 'assets/colors/colors.dart';
 import 'core/data/service_locator.dart';
@@ -13,10 +14,12 @@ import 'features/bottom_navigation_bar/bottom_nav_bar.dart';
 import 'features/bottom_navigation_bar/widgets/navigator.dart';
 import 'features/favourites/presentation/bloc/favourites_bloc.dart';
 
+late ObjectBox objectbox;
 Future<void> main() async {
   setupLocator();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  objectbox = await ObjectBox.create();
 
   runApp(const MyApp());
 }

@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:remote_recipe/main.dart';
 
 import '../../../../core/models/formz/formz_status.dart';
 import '../../../home/domain/entity/recipe.dart';
@@ -12,10 +13,13 @@ part 'favourites_state.dart';
 class FavouritesBloc extends Bloc<FavouritesEvent, FavouritesState> {
   FavouritesBloc() : super(const _FavouritesState()) {
     on<_GetRecipes>((event, emit) {
-      emit(state.copyWith(status: FormzStatus.submissionSuccess));
+      final recipes = objectbox.getRecipes();
+      emit(state.copyWith(
+          status: FormzStatus.submissionSuccess, entities: recipes));
     });
     on<_AddRecipe>((event, emit) {
       final newEntities = state.entities + [event.entity];
+      objectbox.putRecipes(newEntities);
       emit(state.copyWith(entities: newEntities));
     });
     on<_RemoveRecipe>((event, emit) {
