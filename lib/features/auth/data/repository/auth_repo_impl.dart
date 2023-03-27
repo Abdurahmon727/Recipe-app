@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:remote_recipe/features/auth/presentation/pages/sms_check_page.dart';
 
 import '../../../../core/data/either.dart';
 import '../../../../core/data/network_info.dart';
@@ -19,6 +20,7 @@ class AuthRepositoryImpl extends AuthRepository {
       await FirebaseAuth.instance.verifyPhoneNumber(
         phoneNumber: phoneNumber,
         verificationCompleted: (cre) {
+          smsInputController.text = cre.smsCode ?? '';
           FirebaseAuth.instance.signInWithCredential(cre);
         },
         verificationFailed: (FirebaseAuthException e) {

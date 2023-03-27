@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:remote_recipe/core/app_functions.dart';
 import 'package:remote_recipe/objectbox.dart';
 
 import 'assets/colors/colors.dart';
@@ -9,7 +10,6 @@ import 'core/models/authentication_status.dart';
 import 'core/splash/splash_screen.dart';
 import 'features/auth/domain/repository/auth_repo.dart';
 import 'features/auth/presentation/bloc/auth_bloc.dart';
-import 'features/auth/presentation/pages/sign_in_number.dart';
 import 'features/bottom_navigation_bar/bottom_nav_bar.dart';
 import 'features/bottom_navigation_bar/widgets/navigator.dart';
 import 'features/favourites/presentation/bloc/favourites_bloc.dart';
@@ -42,7 +42,11 @@ class _MyAppState extends State<MyApp> {
       providers: [
         BlocProvider<FavouritesBloc>(
           create: (context) => serviceLocator<FavouritesBloc>()
-            ..add(const FavouritesEvent.getRecipes()),
+            ..add(FavouritesEvent.getRecipes(
+              onFailure: (errorMessage) {
+                AppFunctions.showSnackbar(context, errorMessage);
+              },
+            )),
         ),
         BlocProvider(
           create: (context) => AuthBloc(serviceLocator<AuthRepository>()),
@@ -73,7 +77,7 @@ class _MyAppState extends State<MyApp> {
                   fade(page: const BottomNavBar()), (route) => false);
             } else {
               navigator.pushAndRemoveUntil(
-                  fade(page: SignInNumberPage()), (route) => false);
+                  fade(page: BottomNavBar()), (route) => false);
             }
           },
           child: child,

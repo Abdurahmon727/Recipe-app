@@ -18,21 +18,21 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$FavouritesEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() getRecipes,
+    required TResult Function(ValueChanged<String> onFailure) getRecipes,
     required TResult Function(RecipeEntity entity) addRecipe,
     required TResult Function(RecipeEntity entity) removeRecipe,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getRecipes,
+    TResult? Function(ValueChanged<String> onFailure)? getRecipes,
     TResult? Function(RecipeEntity entity)? addRecipe,
     TResult? Function(RecipeEntity entity)? removeRecipe,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getRecipes,
+    TResult Function(ValueChanged<String> onFailure)? getRecipes,
     TResult Function(RecipeEntity entity)? addRecipe,
     TResult Function(RecipeEntity entity)? removeRecipe,
     required TResult orElse(),
@@ -85,6 +85,8 @@ abstract class _$$_GetRecipesCopyWith<$Res> {
   factory _$$_GetRecipesCopyWith(
           _$_GetRecipes value, $Res Function(_$_GetRecipes) then) =
       __$$_GetRecipesCopyWithImpl<$Res>;
+  @useResult
+  $Res call({ValueChanged<String> onFailure});
 }
 
 /// @nodoc
@@ -94,63 +96,90 @@ class __$$_GetRecipesCopyWithImpl<$Res>
   __$$_GetRecipesCopyWithImpl(
       _$_GetRecipes _value, $Res Function(_$_GetRecipes) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? onFailure = null,
+  }) {
+    return _then(_$_GetRecipes(
+      onFailure: null == onFailure
+          ? _value.onFailure
+          : onFailure // ignore: cast_nullable_to_non_nullable
+              as ValueChanged<String>,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_GetRecipes with DiagnosticableTreeMixin implements _GetRecipes {
-  const _$_GetRecipes();
+  const _$_GetRecipes({required this.onFailure});
+
+  @override
+  final ValueChanged<String> onFailure;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FavouritesEvent.getRecipes()';
+    return 'FavouritesEvent.getRecipes(onFailure: $onFailure)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'FavouritesEvent.getRecipes'));
+    properties
+      ..add(DiagnosticsProperty('type', 'FavouritesEvent.getRecipes'))
+      ..add(DiagnosticsProperty('onFailure', onFailure));
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_GetRecipes);
+        (other.runtimeType == runtimeType &&
+            other is _$_GetRecipes &&
+            (identical(other.onFailure, onFailure) ||
+                other.onFailure == onFailure));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, onFailure);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_GetRecipesCopyWith<_$_GetRecipes> get copyWith =>
+      __$$_GetRecipesCopyWithImpl<_$_GetRecipes>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() getRecipes,
+    required TResult Function(ValueChanged<String> onFailure) getRecipes,
     required TResult Function(RecipeEntity entity) addRecipe,
     required TResult Function(RecipeEntity entity) removeRecipe,
   }) {
-    return getRecipes();
+    return getRecipes(onFailure);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getRecipes,
+    TResult? Function(ValueChanged<String> onFailure)? getRecipes,
     TResult? Function(RecipeEntity entity)? addRecipe,
     TResult? Function(RecipeEntity entity)? removeRecipe,
   }) {
-    return getRecipes?.call();
+    return getRecipes?.call(onFailure);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getRecipes,
+    TResult Function(ValueChanged<String> onFailure)? getRecipes,
     TResult Function(RecipeEntity entity)? addRecipe,
     TResult Function(RecipeEntity entity)? removeRecipe,
     required TResult orElse(),
   }) {
     if (getRecipes != null) {
-      return getRecipes();
+      return getRecipes(onFailure);
     }
     return orElse();
   }
@@ -191,7 +220,13 @@ class _$_GetRecipes with DiagnosticableTreeMixin implements _GetRecipes {
 }
 
 abstract class _GetRecipes implements FavouritesEvent {
-  const factory _GetRecipes() = _$_GetRecipes;
+  const factory _GetRecipes({required final ValueChanged<String> onFailure}) =
+      _$_GetRecipes;
+
+  ValueChanged<String> get onFailure;
+  @JsonKey(ignore: true)
+  _$$_GetRecipesCopyWith<_$_GetRecipes> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -266,7 +301,7 @@ class _$_AddRecipe with DiagnosticableTreeMixin implements _AddRecipe {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() getRecipes,
+    required TResult Function(ValueChanged<String> onFailure) getRecipes,
     required TResult Function(RecipeEntity entity) addRecipe,
     required TResult Function(RecipeEntity entity) removeRecipe,
   }) {
@@ -276,7 +311,7 @@ class _$_AddRecipe with DiagnosticableTreeMixin implements _AddRecipe {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getRecipes,
+    TResult? Function(ValueChanged<String> onFailure)? getRecipes,
     TResult? Function(RecipeEntity entity)? addRecipe,
     TResult? Function(RecipeEntity entity)? removeRecipe,
   }) {
@@ -286,7 +321,7 @@ class _$_AddRecipe with DiagnosticableTreeMixin implements _AddRecipe {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getRecipes,
+    TResult Function(ValueChanged<String> onFailure)? getRecipes,
     TResult Function(RecipeEntity entity)? addRecipe,
     TResult Function(RecipeEntity entity)? removeRecipe,
     required TResult orElse(),
@@ -413,7 +448,7 @@ class _$_RemoveRecipe with DiagnosticableTreeMixin implements _RemoveRecipe {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() getRecipes,
+    required TResult Function(ValueChanged<String> onFailure) getRecipes,
     required TResult Function(RecipeEntity entity) addRecipe,
     required TResult Function(RecipeEntity entity) removeRecipe,
   }) {
@@ -423,7 +458,7 @@ class _$_RemoveRecipe with DiagnosticableTreeMixin implements _RemoveRecipe {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getRecipes,
+    TResult? Function(ValueChanged<String> onFailure)? getRecipes,
     TResult? Function(RecipeEntity entity)? addRecipe,
     TResult? Function(RecipeEntity entity)? removeRecipe,
   }) {
@@ -433,7 +468,7 @@ class _$_RemoveRecipe with DiagnosticableTreeMixin implements _RemoveRecipe {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getRecipes,
+    TResult Function(ValueChanged<String> onFailure)? getRecipes,
     TResult Function(RecipeEntity entity)? addRecipe,
     TResult Function(RecipeEntity entity)? removeRecipe,
     required TResult orElse(),

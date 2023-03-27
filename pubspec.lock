@@ -183,13 +183,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.2"
-  cryptography:
-    dependency: transitive
-    description:
-      name: cryptography
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.5.0"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -281,20 +274,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.2.2"
-  firebase_dynamic_links:
-    dependency: "direct main"
-    description:
-      name: firebase_dynamic_links
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "5.0.16"
-  firebase_dynamic_links_platform_interface:
-    dependency: transitive
-    description:
-      name: firebase_dynamic_links_platform_interface
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.3+31"
   fixnum:
     dependency: transitive
     description:
@@ -569,13 +548,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.0"
-  objectbox_generator:
-    dependency: "direct dev"
-    description:
-      name: objectbox_generator
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.0"
   octo_image:
     dependency: transitive
     description:
@@ -667,13 +639,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "5.1.0"
-  pin_input_text_field:
-    dependency: transitive
-    description:
-      name: pin_input_text_field
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "4.4.1"
   pinput:
     dependency: "direct main"
     description:
@@ -833,13 +798,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.8"
-  sms_autofill:
-    dependency: "direct main"
-    description:
-      name: sms_autofill
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.3.0"
   source_gen:
     dependency: transitive
     description:

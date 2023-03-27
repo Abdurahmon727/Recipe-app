@@ -3,11 +3,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pinput/pinput.dart';
-import 'package:sms_autofill/sms_autofill.dart';
 
 import '../../../../assets/colors/colors.dart';
 import '../../../../core/app_functions.dart';
 import '../bloc/auth_bloc.dart';
+
+final smsInputController = TextEditingController();
 
 class SmsCheckPage extends StatefulWidget {
   const SmsCheckPage({super.key, required this.phoneNumber});
@@ -18,8 +19,6 @@ class SmsCheckPage extends StatefulWidget {
 }
 
 class _SmsCheckPageState extends State<SmsCheckPage> {
-  final smsInputController = TextEditingController();
-  String inputtedSmsCode = '';
   late Timer timer;
   int initialSeconds = 30;
   int secondsRemaining = 30;
@@ -76,6 +75,7 @@ class _SmsCheckPageState extends State<SmsCheckPage> {
                     height: 10,
                   ),
                   Pinput(
+                    length: 6,
                     androidSmsAutofillMethod: AndroidSmsAutofillMethod.none,
                     controller: smsInputController,
                   ),
@@ -134,7 +134,7 @@ class _SmsCheckPageState extends State<SmsCheckPage> {
                   GestureDetector(
                     onTap: () {
                       context.read<AuthBloc>().add(AuthEvent.checkSms(
-                          smsCode: inputtedSmsCode,
+                          smsCode: smsInputController.text,
                           onFailure: (value) {
                             AppFunctions.showSnackbar(context, value);
                           }));

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
+import 'package:objectbox/objectbox.dart';
 
 class ServerException extends DioError
     with EquatableMixin
@@ -20,18 +21,21 @@ class ServerException extends DioError
   List<Object?> get props => [];
 }
 
-class CacheException with EquatableMixin implements Exception {
+class CacheException with EquatableMixin implements ObjectBoxException {
   final String statusMessage;
   final num statusCode;
+
   const CacheException({
     required this.statusMessage,
     required this.statusCode,
   });
 
   @override
-  String toString() =>
-      'ServerException(statusMessage: $statusMessage, statusCode: $statusCode)';
+  String toString() => 'ServerException(statusMessage: $statusMessage)';
 
   @override
-  List<Object?> get props => [statusMessage, statusCode];
+  List<Object?> get props => [statusMessage];
+
+  @override
+  String get message => statusMessage;
 }

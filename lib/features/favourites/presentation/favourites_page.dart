@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:remote_recipe/core/app_functions.dart';
 
 import '../../../assets/colors/colors.dart';
 import '../../../core/data/service_locator.dart';
@@ -25,9 +26,11 @@ class FavouritesPage extends StatelessWidget {
           body: BlocBuilder<FavouritesBloc, FavouritesState>(
             builder: (context, state) {
               if (state.status == FormzStatus.pure) {
-                context
-                    .read<FavouritesBloc>()
-                    .add(const FavouritesEvent.getRecipes());
+                context.read<FavouritesBloc>().add(FavouritesEvent.getRecipes(
+                  onFailure: (value) {
+                    AppFunctions.showSnackbar(context, value);
+                  },
+                ));
                 return const SizedBox();
               } else if (state.status == FormzStatus.submissionInProgress) {
                 return const CircularProgressIndicator();

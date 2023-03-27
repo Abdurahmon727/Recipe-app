@@ -24,6 +24,10 @@ class ObjectBox {
     return _box.getAll();
   }
 
+  void removeEntity(int id) {
+    _box.remove(id);
+  }
+
   void putRecipes(List<RecipeEntity> entities) {
     _box.putMany(entities);
   }
