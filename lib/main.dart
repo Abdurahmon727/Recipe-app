@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:remote_recipe/core/app_functions.dart';
+import 'package:remote_recipe/features/auth/presentation/pages/sign_in_number.dart';
 import 'package:remote_recipe/objectbox.dart';
 
 import 'assets/colors/colors.dart';
@@ -77,7 +78,7 @@ class _MyAppState extends State<MyApp> {
                   fade(page: const BottomNavBar()), (route) => false);
             } else {
               navigator.pushAndRemoveUntil(
-                  fade(page: BottomNavBar()), (route) => false);
+                  fade(page: SignInNumberPage()), (route) => false);
             }
           },
           child: child,

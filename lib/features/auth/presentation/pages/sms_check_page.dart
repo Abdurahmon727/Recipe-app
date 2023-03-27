@@ -37,6 +37,7 @@ class _SmsCheckPageState extends State<SmsCheckPage> {
   @override
   void dispose() {
     super.dispose();
+    timer.cancel();
   }
 
   @override
