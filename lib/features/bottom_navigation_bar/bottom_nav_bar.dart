@@ -145,7 +145,7 @@ class _BottomNavBarState extends State<BottomNavBar>
                 ),
               ),
               body: TabBarView(
-                physics: const NeverScrollableScrollPhysics(),
+                physics: const AlwaysScrollableScrollPhysics(),
                 controller: _controller,
                 children: [
                   _buildPageNavigator(NavItemEnum.home),
