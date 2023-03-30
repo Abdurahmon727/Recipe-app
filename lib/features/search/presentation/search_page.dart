@@ -22,7 +22,13 @@ class SearchPage extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             elevation: 2,
-            title: const Text('Search'),
+            title: const Text(
+              'Search',
+              style: TextStyle(
+                fontSize: 19,
+                color: white,
+              ),
+            ),
             bottom: PreferredSize(
               preferredSize: const Size.fromHeight(50),
               child: BlocBuilder<SearchBloc, SearchState>(

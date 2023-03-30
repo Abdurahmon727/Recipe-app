@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:like_button/like_button.dart';
 import 'package:remote_recipe/core/app_functions.dart';
+import 'package:remote_recipe/core/widgets/w_scale.dart';
 import 'package:remote_recipe/features/favourites/presentation/bloc/favourites_bloc.dart';
 
 import '../../../../assets/colors/colors.dart';
@@ -40,8 +41,18 @@ class _DetailedRecipePageState extends State<DetailedRecipePage> {
       child: Builder(builder: (context) {
         return Scaffold(
           appBar: AppBar(
+            leading: WScaleAnimation(
+              onTap: () => Navigator.pop(context),
+              child: const Icon(
+                Icons.keyboard_backspace,
+                color: white,
+              ),
+            ),
             backgroundColor: orange,
-            title: Text(widget.entity.title),
+            title: Text(
+              widget.entity.title,
+              style: const TextStyle(fontSize: 19, color: white),
+            ),
           ),
           floatingActionButton: (isButtonVisible)
               ? FloatingActionButton(

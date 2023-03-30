@@ -20,7 +20,13 @@ class FavouritesPage extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             elevation: 1,
-            title: const Text('My Favourites'),
+            title: const Text(
+              'My Favourites',
+              style: TextStyle(
+                fontSize: 19,
+                color: white,
+              ),
+            ),
             backgroundColor: orange,
           ),
           body: BlocBuilder<FavouritesBloc, FavouritesState>(

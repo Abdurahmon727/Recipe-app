@@ -57,6 +57,7 @@ class _MyAppState extends State<MyApp> {
         navigatorKey: navigatorKey,
         title: 'Recipe App',
         theme: ThemeData(
+          useMaterial3: true,
           textButtonTheme: TextButtonThemeData(style: ButtonStyle(
             overlayColor: MaterialStateProperty.resolveWith<Color>(
               (Set<MaterialState> states) {

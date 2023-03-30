@@ -21,7 +21,13 @@ class HomePage extends StatelessWidget {
           appBar: AppBar(
             backgroundColor: orange,
             elevation: 1,
-            title: const Text('Learn to cook your favourite meals'),
+            title: const Text(
+              'Learn to cook your favourite meals',
+              style: TextStyle(
+                fontSize: 19,
+                color: white,
+              ),
+            ),
           ),
           body: RefreshIndicator(
             color: orange,

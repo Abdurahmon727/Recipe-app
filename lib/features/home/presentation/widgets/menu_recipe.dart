@@ -49,13 +49,13 @@ class WMenuRecipe extends StatelessWidget {
           const SizedBox(width: 5),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.all(4),
+              padding: const EdgeInsets.all(3),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     entity.title,
-                    style: const TextStyle(fontSize: 18),
+                    style: const TextStyle(fontSize: 17),
                     maxLines: 4,
                   ),
                   const Spacer(),
