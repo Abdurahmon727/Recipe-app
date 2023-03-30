@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:remote_recipe/features/auth/presentation/pages/sms_check_page.dart';
 
@@ -9,6 +12,7 @@ import '../../domain/repository/auth_repo.dart';
 String _id = '';
 
 class AuthRepositoryImpl extends AuthRepository {
+  final _dio = Dio();
   final NetworkInfo _networkInfo = const NetworkInfoImpl();
 
   @override
@@ -66,5 +70,17 @@ class AuthRepositoryImpl extends AuthRepository {
     } on FirebaseException catch (e) {
       return Left(ServerFailure(errorMessage: e.message!));
     }
+  }
+
+  @override
+  Future<Either<Failure, File>> getImageLink(String image) async {
+    final response = await _dio.post(
+        'https://api.imgbb.com/1/upload?key=23c4c9710de5dc1efa41ed6b1df5d752',
+        data: image);
+    if (response.statusCode! >= 200 && response.statusCode! < 300) {
+      //TODO
+    }
+
+    throw UnimplementedError();
   }
 }

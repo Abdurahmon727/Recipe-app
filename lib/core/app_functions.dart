@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'data/either.dart';
@@ -53,50 +54,50 @@ abstract class AppFunctions {
   //     );
   // }
 
-  static Future<Either<String, String>> pickImage() async {
+  static Future<Either<String, File>> pickImage() async {
     try {
       final ImagePicker picker = ImagePicker();
       final PickedFile? image =
-          (await picker.pickImage(source: ImageSource.gallery)) as PickedFile?;
-      return Right(image!.path);
+          (await picker.getImage(source: ImageSource.gallery));
+      //return Right(image!.path);
 
-      // if (image != null) {
-      //   final croppedFile = await ImageCropper().cropImage(
-      //     sourcePath: image.path,
-      //     aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
-      //     aspectRatioPresets: [
-      //       CropAspectRatioPreset.square,
-      //       //   CropAspectRatioPreset.ratio3x2,
-      //       //   CropAspectRatioPreset.original,
-      //       //   CropAspectRatioPreset.ratio4x3,
-      //       //   CropAspectRatioPreset.ratio16x9
-      //     ],
-      //     androidUiSettings: const AndroidUiSettings(
-      //       toolbarTitle: 'Crop Image',
-      //       // toolbarWidgetColor: Colors.white,
-      //       initAspectRatio: CropAspectRatioPreset.square,
-      //       lockAspectRatio: true,
-      //     ),
-      //     iosUiSettings: const IOSUiSettings(title: 'Crop Image'),
-      //   );
+      if (image != null) {
+        final croppedFile = await ImageCropper().cropImage(
+          sourcePath: image.path,
+          aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
+          aspectRatioPresets: [
+            CropAspectRatioPreset.square,
+            //   CropAspectRatioPreset.ratio3x2,
+            //   CropAspectRatioPreset.original,
+            //   CropAspectRatioPreset.ratio4x3,
+            //   CropAspectRatioPreset.ratio16x9
+          ],
+          uiSettings: [
+            AndroidUiSettings(
+              toolbarTitle: 'Crop Image',
+              // toolbarWidgetColor: Colors.white,
+              initAspectRatio: CropAspectRatioPreset.square,
+              lockAspectRatio: true,
+            ),
+            IOSUiSettings(title: 'Crop Image'),
+          ],
+        );
 
-      //   if (croppedFile != null) {
-      //     return Right(File(croppedFile.path));
-      //   } else {
-      //     return Right(File(image.path));
-      //   }
-      // } else {
-      //   return Left('No image is selected');
-      // }
-
-    } catch (_) {
-      return Left('Something went wrong');
+        if (croppedFile != null) {
+          return Right(File(croppedFile.path));
+        } else {
+          return Right(File(image.path));
+        }
+      } else {
+        return Left('No image is selected');
+      }
+    } catch (e) {
+      return Left('Something went wrong $e');
     }
   }
 
   static String removeHtmlTags(String data) {
     RegExp exp = RegExp(r"<[^>]*>", multiLine: true, caseSensitive: true);
-
     return data.replaceAll(exp, '');
   }
 

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -10,4 +11,5 @@ abstract class AuthRepository {
   Future<Either<ServerFailure, void>> signIn(String phoneNumber);
   Future<Either<ServerFailure, void>> checkSms(String smsCode);
   Future<Either<Failure, void>> logOut();
+  Future<Either<Failure, File>> getImageLink(String image);
 }
