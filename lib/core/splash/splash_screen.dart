@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:remote_recipe/assets/images/images.dart';
 
 import '../../assets/colors/colors.dart';
 
@@ -12,10 +13,10 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
+        backgroundColor: white,
         body: Center(
-            child: CircularProgressIndicator(
-      color: orange,
-    )));
+          child: Image.asset(AppImages.logo),
+        ));
   }
 }

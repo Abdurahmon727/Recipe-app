@@ -77,7 +77,9 @@ class _SmsCheckPageState extends State<SmsCheckPage> {
                   ),
                   Pinput(
                     length: 6,
-                    androidSmsAutofillMethod: AndroidSmsAutofillMethod.none,
+                    androidSmsAutofillMethod:
+                        AndroidSmsAutofillMethod.smsRetrieverApi,
+                    listenForMultipleSmsOnAndroid: true,
                     controller: smsInputController,
                   ),
                   // TextField(

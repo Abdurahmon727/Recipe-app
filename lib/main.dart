@@ -1,19 +1,20 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:remote_recipe/core/app_functions.dart';
-import 'package:remote_recipe/features/auth/presentation/pages/sign_in_number.dart';
-import 'package:remote_recipe/objectbox.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import 'assets/colors/colors.dart';
+import 'core/app_functions.dart';
 import 'core/data/service_locator.dart';
 import 'core/models/authentication_status.dart';
 import 'core/splash/splash_screen.dart';
 import 'features/auth/domain/repository/auth_repo.dart';
 import 'features/auth/presentation/bloc/auth_bloc.dart';
+import 'features/auth/presentation/pages/sign_in_number.dart';
 import 'features/bottom_navigation_bar/bottom_nav_bar.dart';
 import 'features/bottom_navigation_bar/widgets/navigator.dart';
 import 'features/favourites/presentation/bloc/favourites_bloc.dart';
+import 'objectbox.dart';
 
 late ObjectBox objectbox;
 Future<void> main() async {
@@ -23,6 +24,7 @@ Future<void> main() async {
   objectbox = await ObjectBox.create();
 
   runApp(const MyApp());
+  FlutterNativeSplash.remove();
 }
 
 class MyApp extends StatefulWidget {
