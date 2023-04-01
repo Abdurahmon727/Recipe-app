@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
+import 'package:remote_recipe/assets/animations/animations.dart';
 import 'package:remote_recipe/features/search/domain/entity/suggestion.dart';
 
 import '../../../assets/colors/colors.dart';
@@ -108,6 +110,7 @@ class SearchPage extends StatelessWidget {
                             .read<SearchBloc>()
                             .add(SearchEvent.getSuggestions(value)),
                         focusNode: focusNode,
+                        textInputAction: TextInputAction.search,
                         style: const TextStyle(color: white),
                         cursorColor: white,
                         controller: textEditingController,
@@ -137,8 +140,8 @@ class SearchPage extends StatelessWidget {
             if (state.status == FormzStatus.pure) {
               return const SizedBox();
             } else if (state.status == FormzStatus.submissionInProgress) {
-              return const Center(
-                child: CircularProgressIndicator(color: orange),
+              return Center(
+                child: Lottie.asset(AppAnimations.search, height: 150),
               );
             } else if (state.status == FormzStatus.submissionSuccess) {
               if (state.results.isNotEmpty) {

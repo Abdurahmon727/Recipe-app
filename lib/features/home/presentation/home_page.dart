@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 
+import '../../../assets/animations/animations.dart';
 import '../../../assets/colors/colors.dart';
 import '../../../core/models/formz/formz_status.dart';
 import '../../../core/widgets/pagination_loader.dart';
-import '../../bottom_navigation_bar/widgets/navigator.dart';
 import 'bloc/home_bloc/home_bloc.dart';
 import 'pages/detailed_recipe.dart';
 import 'widgets/menu_recipe.dart';
@@ -40,9 +41,11 @@ class HomePage extends StatelessWidget {
                   context.read<HomeBloc>().add(const HomeEvent.getRecipes());
                   return const SizedBox();
                 } else if (state.status == FormzStatus.submissionInProgress) {
-                  return const Center(
-                    child: CircularProgressIndicator(color: orange),
-                  );
+                  return Center(
+                      child: Lottie.asset(
+                    AppAnimations.cook,
+                    height: 200,
+                  ));
                 } else if (state.status == FormzStatus.submissionSuccess) {
                   return PaginationLoader(
                     padding: const EdgeInsets.all(16),
@@ -76,7 +79,19 @@ class HomePage extends StatelessWidget {
                       child: SizedBox(
                         height: MediaQuery.of(context).size.height - 152,
                         width: MediaQuery.of(context).size.width,
-                        child: Center(child: Text(state.errorMessage)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Lottie.asset(
+                              AppAnimations.error,
+                              height: 250,
+                            ),
+                            Text(
+                              state.errorMessage,
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   );

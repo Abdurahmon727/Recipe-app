@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
+import 'package:remote_recipe/assets/animations/animations.dart';
 import 'package:remote_recipe/core/app_functions.dart';
 
 import '../../../assets/colors/colors.dart';
@@ -62,8 +64,20 @@ class FavouritesPage extends StatelessWidget {
                     itemCount: state.entities.length,
                   );
                 } else {
-                  return const Center(
-                    child: Text('Empty'),
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        LottieBuilder.asset(
+                          AppAnimations.empty,
+                          height: 200,
+                        ),
+                        const Text(
+                          'Empty',
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
                   );
                 }
               } else {
