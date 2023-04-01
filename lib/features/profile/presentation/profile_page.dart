@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,12 +31,35 @@ class _ProfilePageState extends State<ProfilePage> {
                 Align(
                   alignment: Alignment.topRight,
                   child: WScaleAnimation(
-                    onTap: () async {
-                      context.read<AuthBloc>().add(
-                        AuthEvent.logOut(
-                          onFailure: (String errorMessage) {
-                            AppFunctions.showSnackbar(context, errorMessage);
-                          },
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) => BackdropFilter(
+                          filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                          child: AlertDialog(
+                            content: const Text('Are you sure to log out?'),
+                            actions: [
+                              TextButton(
+                                  onPressed: () => Navigator.pop(context),
+                                  child: Text(
+                                    'No',
+                                    style:
+                                        Theme.of(context).textTheme.bodyText1,
+                                  )),
+                              TextButton(
+                                  onPressed: () => context.read<AuthBloc>().add(
+                                        AuthEvent.logOut(
+                                          onFailure: (String errorMessage) {
+                                            AppFunctions.showSnackbar(
+                                                context, errorMessage);
+                                          },
+                                        ),
+                                      ),
+                                  child: const Text(
+                                    'Yes, let me out',
+                                  )),
+                            ],
+                          ),
                         ),
                       );
                     },
