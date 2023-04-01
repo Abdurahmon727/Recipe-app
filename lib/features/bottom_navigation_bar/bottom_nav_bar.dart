@@ -22,6 +22,7 @@ class _BottomNavBarState extends State<BottomNavBar>
   late TabController _controller;
   late double navBarWidth;
   final List<double> wavePosition = [0.0, 0.2, 0.4, 0.6];
+  final homeScrollController = ScrollController();
 
   late AnimationController controller;
   final Map<NavItemEnum, GlobalKey<NavigatorState>> _navigatorKeys = {
@@ -56,6 +57,8 @@ class _BottomNavBarState extends State<BottomNavBar>
 
   int _currentIndex = 0;
 
+  int oldIndex = 0;
+
   @override
   void initState() {
     controller = AnimationController(
@@ -73,10 +76,18 @@ class _BottomNavBarState extends State<BottomNavBar>
   }
 
   void onTabChange() {
-    setState(() => _currentIndex = _controller.index);
+    //   if ( _currentIndex == 0 && homeScrollController.hasClients) {
+    //   homeScrollController.animateTo(0,
+    //       duration: const Duration(milliseconds: 500), curve: Curves.easeOut);
+    // }
+    if (_currentIndex != _controller.index) {
+      setState(() => _currentIndex = _controller.index);
+    }
+    // print(_currentIndex);
   }
 
   Widget _buildPageNavigator(NavItemEnum tabItem) => TabNavigator(
+        homeScrollController: homeScrollController,
         navigatorKey: _navigatorKeys[tabItem]!,
         tabItem: tabItem,
       );
@@ -118,7 +129,16 @@ class _BottomNavBarState extends State<BottomNavBar>
                     TabBar(
                       splashBorderRadius: BorderRadius.zero,
                       enableFeedback: true,
-                      onTap: (index) {},
+                      onTap: (index) {
+                        if (index == 0 &&
+                            oldIndex == 0 &&
+                            homeScrollController.hasClients) {
+                          homeScrollController.animateTo(0,
+                              duration: const Duration(milliseconds: 500),
+                              curve: Curves.easeOut);
+                        }
+                        oldIndex = index;
+                      },
                       indicator: const BoxDecoration(),
                       controller: _controller,
                       labelPadding: EdgeInsets.zero,

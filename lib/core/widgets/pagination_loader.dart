@@ -10,6 +10,7 @@ class PaginationLoader extends StatelessWidget {
   final EdgeInsets? margin;
   final EdgeInsets? padding;
   final List<dynamic> list;
+  final ScrollController? controller;
 
   final VoidCallback onLoadMore;
   final double seperatorHeight;
@@ -23,17 +24,20 @@ class PaginationLoader extends StatelessWidget {
     this.padding,
     this.margin,
     Key? key,
+    this.controller,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) => Container(
         margin: margin,
         child: Scrollbar(
+          controller: controller,
           thickness: 8,
           radius: const Radius.circular(15),
           showTrackOnHover: true,
           interactive: true,
           child: SingleChildScrollView(
+            controller: controller,
             padding: padding,
             physics: scrollPhysics,
             child: Column(

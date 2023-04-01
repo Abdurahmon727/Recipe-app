@@ -1,11 +1,9 @@
-// ignore_for_file: library_private_types_in_public_api
-
 import 'package:flutter/cupertino.dart';
-import 'package:remote_recipe/features/favourites/presentation/favourites_page.dart';
-import 'package:remote_recipe/features/home/presentation/home_page.dart';
-import 'package:remote_recipe/features/profile/presentation/profile_page.dart';
-import 'package:remote_recipe/features/search/presentation/search_page.dart';
 
+import '../../favourites/presentation/favourites_page.dart';
+import '../../home/presentation/home_page.dart';
+import '../../profile/presentation/profile_page.dart';
+import '../../search/presentation/search_page.dart';
 import '../navbar/nav_item_enum.dart';
 
 class TabNavigatorRoutes {
@@ -16,10 +14,12 @@ class TabNavigator extends StatefulWidget {
   const TabNavigator({
     required this.navigatorKey,
     required this.tabItem,
+    required this.homeScrollController,
     Key? key,
   }) : super(key: key);
   final GlobalKey<NavigatorState> navigatorKey;
   final NavItemEnum tabItem;
+  final ScrollController homeScrollController;
 
   @override
   _TabNavigatorState createState() => _TabNavigatorState();
@@ -32,7 +32,8 @@ class _TabNavigatorState extends State<TabNavigator>
     switch (widget.tabItem) {
       case NavItemEnum.home:
         return {
-          TabNavigatorRoutes.root: (context) => const HomePage(),
+          TabNavigatorRoutes.root: (context) =>
+              HomePage(scrollController: widget.homeScrollController),
         };
       case NavItemEnum.search:
         return {

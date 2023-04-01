@@ -11,7 +11,8 @@ import 'pages/detailed_recipe.dart';
 import 'widgets/menu_recipe.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  const HomePage({super.key, required this.scrollController});
+  final ScrollController scrollController;
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +49,7 @@ class HomePage extends StatelessWidget {
                   ));
                 } else if (state.status == FormzStatus.submissionSuccess) {
                   return PaginationLoader(
+                    controller: scrollController,
                     padding: const EdgeInsets.all(16),
                     seperatorHeight: 10,
                     list: state.entities
