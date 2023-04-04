@@ -41,9 +41,28 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "2:4175633412273283792",
+      "lastPropertyId": "2:4132653654295266957",
+      "name": "SearchHistoryElement",
+      "properties": [
+        {
+          "id": "1:8283617041285374745",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:4132653654295266957",
+          "name": "name",
+          "type": 9
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "1:7860693157684598246",
+  "lastEntityId": "2:4175633412273283792",
   "lastIndexId": "0:0",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",

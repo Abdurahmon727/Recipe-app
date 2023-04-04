@@ -12,8 +12,10 @@ import 'dart:typed_data';
 import 'package:flat_buffers/flat_buffers.dart' as fb;
 import 'package:objectbox/internal.dart'; // generated code can access "internal" functionality
 import 'package:objectbox/objectbox.dart';
+import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
 import 'features/home/domain/entity/recipe.dart';
+import 'features/search/domain/entity/search_history.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
 
@@ -56,19 +58,38 @@ final _entities = <ModelEntity>[
             flags: 0)
       ],
       relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(2, 4175633412273283792),
+      name: 'SearchHistoryElement',
+      lastPropertyId: const IdUid(2, 4132653654295266957),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 8283617041285374745),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 4132653654295266957),
+            name: 'name',
+            type: 9,
+            flags: 0)
+      ],
+      relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[])
 ];
 
 /// Open an ObjectBox store with the model declared in this file.
-Store openStore(
+Future<Store> openStore(
         {String? directory,
         int? maxDBSizeInKB,
         int? fileMode,
         int? maxReaders,
         bool queriesCaseSensitiveDefault = true,
-        String? macosApplicationGroup}) =>
+        String? macosApplicationGroup}) async =>
     Store(getObjectBoxModel(),
-        directory: directory,
+        directory: directory ?? (await defaultStoreDirectory()).path,
         maxDBSizeInKB: maxDBSizeInKB,
         fileMode: fileMode,
         maxReaders: maxReaders,
@@ -79,7 +100,7 @@ Store openStore(
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(1, 7860693157684598246),
+      lastEntityId: const IdUid(2, 4175633412273283792),
       lastIndexId: const IdUid(0, 0),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
@@ -138,6 +159,33 @@ ModelDefinition getObjectBoxModel() {
                   const fb.Int64Reader().vTableGet(buffer, rootOffset, 14, 0));
 
           return object;
+        }),
+    SearchHistoryElement: EntityDefinition<SearchHistoryElement>(
+        model: _entities[1],
+        toOneRelations: (SearchHistoryElement object) => [],
+        toManyRelations: (SearchHistoryElement object) => {},
+        getId: (SearchHistoryElement object) => object.id,
+        setId: (SearchHistoryElement object, int id) {
+          object.id = id;
+        },
+        objectToFB: (SearchHistoryElement object, fb.Builder fbb) {
+          final nameOffset = fbb.writeString(object.name);
+          fbb.startTable(3);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, nameOffset);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+
+          final object = SearchHistoryElement(
+              id: const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0),
+              name: const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 6, ''));
+
+          return object;
         })
   };
 
@@ -169,4 +217,15 @@ class RecipeEntity_ {
   /// see [RecipeEntity.healthyScore]
   static final healthyScore =
       QueryIntegerProperty<RecipeEntity>(_entities[0].properties[5]);
+}
+
+/// [SearchHistoryElement] entity fields to define ObjectBox queries.
+class SearchHistoryElement_ {
+  /// see [SearchHistoryElement.id]
+  static final id =
+      QueryIntegerProperty<SearchHistoryElement>(_entities[1].properties[0]);
+
+  /// see [SearchHistoryElement.name]
+  static final name =
+      QueryStringProperty<SearchHistoryElement>(_entities[1].properties[1]);
 }

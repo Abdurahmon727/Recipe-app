@@ -138,7 +138,38 @@ class SearchPage extends StatelessWidget {
           ),
           body: BlocBuilder<SearchBloc, SearchState>(builder: (_, state) {
             if (state.status == FormzStatus.pure) {
-              return const SizedBox();
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Wrap(
+                  spacing: 5,
+                  children: [
+                    Chip(
+                      onDeleted: () {},
+                      elevation: 2,
+                      deleteIcon: const Icon(Icons.remove_circle_outline),
+                      backgroundColor: orange,
+                      label: Text(
+                        'something',
+                        style: TextStyle(
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+                    Chip(
+                      label: Text('something'),
+                    ),
+                    Chip(
+                      label: Text('something'),
+                    ),
+                    Chip(
+                      label: Text('something'),
+                    ),
+                    Chip(
+                      label: Text('something'),
+                    ),
+                  ],
+                ),
+              );
             } else if (state.status == FormzStatus.submissionInProgress) {
               return Center(
                 child: Lottie.asset(AppAnimations.search, height: 150),
