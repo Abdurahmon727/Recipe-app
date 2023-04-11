@@ -52,10 +52,12 @@ class _DetailedRecipePageState extends State<DetailedRecipePage> {
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  widget.entity.title,
-                  style: const TextStyle(fontSize: 19, color: white),
-                  maxLines: 4,
+                Expanded(
+                  child: Text(
+                    widget.entity.title,
+                    style: const TextStyle(fontSize: 19, color: white),
+                    maxLines: 4,
+                  ),
                 ),
                 WScaleAnimation(
                     onTap: () async {

@@ -63,10 +63,12 @@ class _DetailedRecipeLoadPageState extends State<DetailedRecipeLoadPage> {
                   title: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        state.entity.title,
-                        style: const TextStyle(fontSize: 19, color: white),
-                        maxLines: 4,
+                      Expanded(
+                        child: Text(
+                          state.entity.title,
+                          style: const TextStyle(fontSize: 19, color: white),
+                          maxLines: 4,
+                        ),
                       ),
                       WScaleAnimation(
                           onTap: () async {

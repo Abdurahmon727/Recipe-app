@@ -3,8 +3,6 @@ import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:remote_recipe/features/home/presentation/bloc/detailed_recipe_load/detailed_recipe_load_bloc.dart';
-import 'package:remote_recipe/features/home/presentation/pages/detailed_recipe_load.dart';
 
 import 'assets/colors/colors.dart';
 import 'core/app_functions.dart';
@@ -17,6 +15,7 @@ import 'features/auth/presentation/pages/sign_in_number.dart';
 import 'features/bottom_navigation_bar/bottom_nav_bar.dart';
 import 'features/bottom_navigation_bar/widgets/navigator.dart';
 import 'features/favourites/presentation/bloc/favourites_bloc.dart';
+import 'features/home/presentation/pages/detailed_recipe_load.dart';
 import 'objectbox.dart';
 
 late ObjectBox objectbox;

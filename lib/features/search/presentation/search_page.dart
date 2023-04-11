@@ -1,16 +1,14 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
-import 'package:remote_recipe/assets/animations/animations.dart';
-import 'package:remote_recipe/features/search/domain/entity/suggestion.dart';
 
+import '../../../assets/animations/animations.dart';
 import '../../../assets/colors/colors.dart';
 import '../../../core/models/formz/formz_status.dart';
 import '../../home/presentation/pages/detailed_recipe.dart';
 import '../../home/presentation/widgets/menu_recipe.dart';
+import '../domain/entity/suggestion.dart';
 import 'bloc/search_bloc.dart';
 
 class SearchPage extends StatelessWidget {
