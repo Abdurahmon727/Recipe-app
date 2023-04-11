@@ -1,19 +1,18 @@
-// ignore_for_file: curly_braces_in_flow_control_structures
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:like_button/like_button.dart';
-import 'package:remote_recipe/core/app_functions.dart';
-import 'package:remote_recipe/core/widgets/w_scale.dart';
-import 'package:remote_recipe/features/favourites/presentation/bloc/favourites_bloc.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../../assets/colors/colors.dart';
 import '../../../../assets/images/images.dart';
+import '../../../../core/app_functions.dart';
 import '../../../../core/models/formz/formz_status.dart';
+import '../../../../core/widgets/w_scale.dart';
 import '../../../bottom_navigation_bar/widgets/navigator.dart';
+import '../../../favourites/presentation/bloc/favourites_bloc.dart';
 import '../../domain/entity/recipe.dart';
 import '../bloc/similar_recipe_bloc/bloc/similar_recipe_bloc.dart';
 import '../widgets/menu_recipe.dart';
@@ -49,9 +48,27 @@ class _DetailedRecipePageState extends State<DetailedRecipePage> {
               ),
             ),
             backgroundColor: orange,
-            title: Text(
-              widget.entity.title,
-              style: const TextStyle(fontSize: 19, color: white),
+            titleSpacing: 0,
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  widget.entity.title,
+                  style: const TextStyle(fontSize: 19, color: white),
+                  maxLines: 4,
+                ),
+                WScaleAnimation(
+                    onTap: () async {
+                      Share.share(
+                          await AppFunctions.createDynamicLink(
+                              widget.entity.id),
+                          subject: 'Checkout this recipe');
+                    },
+                    child: const Padding(
+                      padding: EdgeInsets.all(6),
+                      child: Icon(Icons.share, color: white),
+                    )),
+              ],
             ),
           ),
           floatingActionButton: (isButtonVisible)

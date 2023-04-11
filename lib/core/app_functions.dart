@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
@@ -152,5 +153,27 @@ abstract class AppFunctions {
     final minute =
         time.minute < 10 ? '0${time.minute}' : time.minute.toString();
     return '$hour:$minute';
+  }
+
+  static Future<String> createDynamicLink(int id) async {
+    final DynamicLinkParameters parameters = DynamicLinkParameters(
+      uriPrefix: 'https://recipe7.page.link',
+
+      link: Uri.parse('https://google.com/$id'),
+      androidParameters: const AndroidParameters(
+        packageName: 'com.example.remote_recipe',
+        minimumVersion: 0,
+      ),
+      // iosParameters: const IOSParameters(
+      //   bundleId: 'io.flutter.plugins.firebase.dynamiclinksexample',
+      //   minimumVersion: '0',
+      // ),
+    );
+    Uri url;
+
+    url = (await FirebaseDynamicLinks.instance.buildShortLink(parameters))
+        .shortUrl;
+
+    return url.toString();
   }
 }

@@ -37,7 +37,7 @@ class SearchRepositoryImpl extends SearchRepository {
     if (await _networkInfo.connected) {
       try {
         final data = await _remoteDataSource.getResults(query);
-        return Right(Converter.recipeModelToEntity(data));
+        return Right(Converter.recipeModelsToEntities(data));
       } on ServerException {
         rethrow;
       } catch (e) {
@@ -56,7 +56,7 @@ class SearchRepositoryImpl extends SearchRepository {
     if (await _networkInfo.connected) {
       try {
         final data = await _remoteDataSource.getSuggestionResult(id);
-        return Right(Converter.recipeModelToEntity(data));
+        return Right(Converter.recipeModelsToEntities(data));
       } on ServerException {
         rethrow;
       } catch (e) {

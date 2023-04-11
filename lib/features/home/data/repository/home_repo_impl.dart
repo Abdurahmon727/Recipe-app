@@ -16,7 +16,7 @@ class HomeRepositoryImpl extends HomeRepository {
       try {
         final data = await _remoteDataSource.getRecipes();
 
-        return Right(Converter.recipeModelToEntity(data));
+        return Right(Converter.recipeModelsToEntities(data));
       } on ServerException {
         rethrow;
       } catch (e) {
@@ -32,6 +32,23 @@ class HomeRepositoryImpl extends HomeRepository {
     if (await _networkInfo.connected) {
       try {
         final data = await _remoteDataSource.getSimilarRecipes(id);
+
+        return Right(Converter.recipeModelsToEntities(data));
+      } on ServerException {
+        rethrow;
+      } catch (e) {
+        return Left(ServerFailure(errorMessage: e.toString()));
+      }
+    } else {
+      return Left(const ServerFailure(errorMessage: "No Internet"));
+    }
+  }
+
+  @override
+  Future<Either<Failure, RecipeEntity>> getRecipe(int id) async {
+    if (await _networkInfo.connected) {
+      try {
+        final data = await _remoteDataSource.getRecipe(id);
 
         return Right(Converter.recipeModelToEntity(data));
       } on ServerException {

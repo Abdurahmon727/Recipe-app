@@ -1,7 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:remote_recipe/features/home/presentation/bloc/detailed_recipe_load/detailed_recipe_load_bloc.dart';
+import 'package:remote_recipe/features/home/presentation/pages/detailed_recipe_load.dart';
 
 import 'assets/colors/colors.dart';
 import 'core/app_functions.dart';
@@ -38,6 +41,25 @@ class _MyAppState extends State<MyApp> {
   final navigatorKey = GlobalKey<NavigatorState>();
 
   NavigatorState get navigator => navigatorKey.currentState!;
+
+  @override
+  void initState() {
+    super.initState();
+    FirebaseDynamicLinks.instance.onLink.listen((linkData) {
+      final productId = linkData.link.path.replaceAll('/', '');
+      navigator.push(
+        fade(
+          page: DetailedRecipeLoadPage(
+            id: int.parse(productId),
+          ),
+        ),
+      );
+      print('DYNAMIC LINK: $productId');
+    }).onError((error) {
+      print('onLink error');
+      print(error.message);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

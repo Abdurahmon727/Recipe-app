@@ -7,6 +7,7 @@ import '../models/recipe.dart';
 abstract class HomeRemoteDataSource {
   Future<List<RecipeModel>> getRecipes();
   Future<List<RecipeModel>> getSimilarRecipes(int id);
+  Future<RecipeModel> getRecipe(int id);
 }
 
 class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
@@ -45,6 +46,18 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
       }).toList();
 
       return Future.wait(models);
+    } else {
+      throw ServerException(
+          statusMessage: "Server Failure", statusCode: response.statusCode!);
+    }
+  }
+
+  @override
+  Future<RecipeModel> getRecipe(int id) async {
+    final response = await _dio.get(
+        'https://api.spoonacular.com/recipes/$id/information?apiKey=$apiKey');
+    if (response.statusCode! >= 200 && response.statusCode! < 300) {
+      return RecipeModel.fromJson(response.data);
     } else {
       throw ServerException(
           statusMessage: "Server Failure", statusCode: response.statusCode!);
