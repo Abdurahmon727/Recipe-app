@@ -67,7 +67,7 @@ class _DetailedRecipeLoadPageState extends State<DetailedRecipeLoadPage> {
                         child: Text(
                           state.entity.title,
                           style: const TextStyle(fontSize: 19, color: white),
-                          maxLines: 4,
+                          maxLines: 2,
                         ),
                       ),
                       WScaleAnimation(

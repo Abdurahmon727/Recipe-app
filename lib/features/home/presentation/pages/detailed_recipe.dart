@@ -56,7 +56,7 @@ class _DetailedRecipePageState extends State<DetailedRecipePage> {
                   child: Text(
                     widget.entity.title,
                     style: const TextStyle(fontSize: 19, color: white),
-                    maxLines: 4,
+                    maxLines: 2,
                   ),
                 ),
                 WScaleAnimation(
