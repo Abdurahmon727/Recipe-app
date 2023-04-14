@@ -1,7 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
+import 'package:remote_recipe/core/widgets/w_scale.dart';
+import 'package:remote_recipe/features/search/domain/entity/search_history.dart';
+import 'package:remote_recipe/main.dart';
 
 import '../../../assets/animations/animations.dart';
 import '../../../assets/colors/colors.dart';
@@ -12,7 +16,7 @@ import '../domain/entity/suggestion.dart';
 import 'bloc/search_bloc.dart';
 
 class SearchPage extends StatelessWidget {
-  const SearchPage({super.key});
+  SearchPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -116,13 +120,21 @@ class SearchPage extends StatelessWidget {
                         onSubmitted: (text) => context
                             .read<SearchBloc>()
                             .add(SearchEvent.getResults(text)),
-                        decoration: const InputDecoration(
-                            focusedBorder: OutlineInputBorder(
+                        decoration: InputDecoration(
+                            suffixIcon: WScaleAnimation(
+                                onTap: () {
+                                  textEditingController.clear();
+                                  context
+                                      .read<SearchBloc>()
+                                      .add(const SearchEvent.clear());
+                                },
+                                child: const Icon(Icons.clear, color: white)),
+                            focusedBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(color: white),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(15))),
-                            contentPadding: EdgeInsets.only(left: 8),
-                            border: OutlineInputBorder(
+                            contentPadding: const EdgeInsets.only(left: 8),
+                            border: const OutlineInputBorder(
                                 borderSide: BorderSide(color: white),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(15)))),
@@ -140,32 +152,24 @@ class SearchPage extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Wrap(
                   spacing: 5,
-                  children: [
-                    Chip(
-                      onDeleted: () {},
-                      elevation: 2,
-                      deleteIcon: const Icon(Icons.remove_circle_outline),
-                      backgroundColor: orange,
-                      label: Text(
-                        'something',
-                        style: TextStyle(
-                          fontSize: 14,
+                  children: List.generate(
+                    state.history.length,
+                    (index) {
+                      return Chip(
+                        onDeleted: () {
+                          objectbox.removeSearchHistoryElement(state
+                              .history[state.history.length - index - 1].id);
+                        },
+                        elevation: 2,
+                        deleteIcon: const Icon(Icons.remove_circle_outline),
+                        backgroundColor: orange,
+                        label: Text(
+                          state.history[state.history.length - index - 1].name,
+                          style: const TextStyle(fontSize: 14),
                         ),
-                      ),
-                    ),
-                    Chip(
-                      label: Text('something'),
-                    ),
-                    Chip(
-                      label: Text('something'),
-                    ),
-                    Chip(
-                      label: Text('something'),
-                    ),
-                    Chip(
-                      label: Text('something'),
-                    ),
-                  ],
+                      );
+                    },
+                  ),
                 ),
               );
             } else if (state.status == FormzStatus.submissionInProgress) {

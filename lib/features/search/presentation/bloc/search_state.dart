@@ -6,6 +6,7 @@ class SearchState with _$SearchState {
     @Default(FormzStatus.pure) FormzStatus status,
     @Default([]) List<SuggestionEntity> suggestions,
     @Default([]) List<RecipeEntity> results,
+    @Default([]) List<SearchHistoryElement> history,
     @Default('') String errorMessage,
   }) = _SearchState;
 }

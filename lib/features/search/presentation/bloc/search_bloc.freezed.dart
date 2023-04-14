@@ -21,6 +21,8 @@ mixin _$SearchEvent {
     required TResult Function(String query) getSuggestions,
     required TResult Function(String query) getResults,
     required TResult Function(int id) getSuggestionResult,
+    required TResult Function() clear,
+    required TResult Function(List<SearchHistoryElement> history) changeHistory,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +30,8 @@ mixin _$SearchEvent {
     TResult? Function(String query)? getSuggestions,
     TResult? Function(String query)? getResults,
     TResult? Function(int id)? getSuggestionResult,
+    TResult? Function()? clear,
+    TResult? Function(List<SearchHistoryElement> history)? changeHistory,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +39,8 @@ mixin _$SearchEvent {
     TResult Function(String query)? getSuggestions,
     TResult Function(String query)? getResults,
     TResult Function(int id)? getSuggestionResult,
+    TResult Function()? clear,
+    TResult Function(List<SearchHistoryElement> history)? changeHistory,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +49,8 @@ mixin _$SearchEvent {
     required TResult Function(_GetSuggestions value) getSuggestions,
     required TResult Function(_GetResults value) getResults,
     required TResult Function(_GetSuggestionResult value) getSuggestionResult,
+    required TResult Function(_Clear value) clear,
+    required TResult Function(_ChangeHistory value) changeHistory,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +58,8 @@ mixin _$SearchEvent {
     TResult? Function(_GetSuggestions value)? getSuggestions,
     TResult? Function(_GetResults value)? getResults,
     TResult? Function(_GetSuggestionResult value)? getSuggestionResult,
+    TResult? Function(_Clear value)? clear,
+    TResult? Function(_ChangeHistory value)? changeHistory,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +67,8 @@ mixin _$SearchEvent {
     TResult Function(_GetSuggestions value)? getSuggestions,
     TResult Function(_GetResults value)? getResults,
     TResult Function(_GetSuggestionResult value)? getSuggestionResult,
+    TResult Function(_Clear value)? clear,
+    TResult Function(_ChangeHistory value)? changeHistory,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -147,6 +159,8 @@ class _$_GetSuggestions implements _GetSuggestions {
     required TResult Function(String query) getSuggestions,
     required TResult Function(String query) getResults,
     required TResult Function(int id) getSuggestionResult,
+    required TResult Function() clear,
+    required TResult Function(List<SearchHistoryElement> history) changeHistory,
   }) {
     return getSuggestions(query);
   }
@@ -157,6 +171,8 @@ class _$_GetSuggestions implements _GetSuggestions {
     TResult? Function(String query)? getSuggestions,
     TResult? Function(String query)? getResults,
     TResult? Function(int id)? getSuggestionResult,
+    TResult? Function()? clear,
+    TResult? Function(List<SearchHistoryElement> history)? changeHistory,
   }) {
     return getSuggestions?.call(query);
   }
@@ -167,6 +183,8 @@ class _$_GetSuggestions implements _GetSuggestions {
     TResult Function(String query)? getSuggestions,
     TResult Function(String query)? getResults,
     TResult Function(int id)? getSuggestionResult,
+    TResult Function()? clear,
+    TResult Function(List<SearchHistoryElement> history)? changeHistory,
     required TResult orElse(),
   }) {
     if (getSuggestions != null) {
@@ -181,6 +199,8 @@ class _$_GetSuggestions implements _GetSuggestions {
     required TResult Function(_GetSuggestions value) getSuggestions,
     required TResult Function(_GetResults value) getResults,
     required TResult Function(_GetSuggestionResult value) getSuggestionResult,
+    required TResult Function(_Clear value) clear,
+    required TResult Function(_ChangeHistory value) changeHistory,
   }) {
     return getSuggestions(this);
   }
@@ -191,6 +211,8 @@ class _$_GetSuggestions implements _GetSuggestions {
     TResult? Function(_GetSuggestions value)? getSuggestions,
     TResult? Function(_GetResults value)? getResults,
     TResult? Function(_GetSuggestionResult value)? getSuggestionResult,
+    TResult? Function(_Clear value)? clear,
+    TResult? Function(_ChangeHistory value)? changeHistory,
   }) {
     return getSuggestions?.call(this);
   }
@@ -201,6 +223,8 @@ class _$_GetSuggestions implements _GetSuggestions {
     TResult Function(_GetSuggestions value)? getSuggestions,
     TResult Function(_GetResults value)? getResults,
     TResult Function(_GetSuggestionResult value)? getSuggestionResult,
+    TResult Function(_Clear value)? clear,
+    TResult Function(_ChangeHistory value)? changeHistory,
     required TResult orElse(),
   }) {
     if (getSuggestions != null) {
@@ -286,6 +310,8 @@ class _$_GetResults implements _GetResults {
     required TResult Function(String query) getSuggestions,
     required TResult Function(String query) getResults,
     required TResult Function(int id) getSuggestionResult,
+    required TResult Function() clear,
+    required TResult Function(List<SearchHistoryElement> history) changeHistory,
   }) {
     return getResults(query);
   }
@@ -296,6 +322,8 @@ class _$_GetResults implements _GetResults {
     TResult? Function(String query)? getSuggestions,
     TResult? Function(String query)? getResults,
     TResult? Function(int id)? getSuggestionResult,
+    TResult? Function()? clear,
+    TResult? Function(List<SearchHistoryElement> history)? changeHistory,
   }) {
     return getResults?.call(query);
   }
@@ -306,6 +334,8 @@ class _$_GetResults implements _GetResults {
     TResult Function(String query)? getSuggestions,
     TResult Function(String query)? getResults,
     TResult Function(int id)? getSuggestionResult,
+    TResult Function()? clear,
+    TResult Function(List<SearchHistoryElement> history)? changeHistory,
     required TResult orElse(),
   }) {
     if (getResults != null) {
@@ -320,6 +350,8 @@ class _$_GetResults implements _GetResults {
     required TResult Function(_GetSuggestions value) getSuggestions,
     required TResult Function(_GetResults value) getResults,
     required TResult Function(_GetSuggestionResult value) getSuggestionResult,
+    required TResult Function(_Clear value) clear,
+    required TResult Function(_ChangeHistory value) changeHistory,
   }) {
     return getResults(this);
   }
@@ -330,6 +362,8 @@ class _$_GetResults implements _GetResults {
     TResult? Function(_GetSuggestions value)? getSuggestions,
     TResult? Function(_GetResults value)? getResults,
     TResult? Function(_GetSuggestionResult value)? getSuggestionResult,
+    TResult? Function(_Clear value)? clear,
+    TResult? Function(_ChangeHistory value)? changeHistory,
   }) {
     return getResults?.call(this);
   }
@@ -340,6 +374,8 @@ class _$_GetResults implements _GetResults {
     TResult Function(_GetSuggestions value)? getSuggestions,
     TResult Function(_GetResults value)? getResults,
     TResult Function(_GetSuggestionResult value)? getSuggestionResult,
+    TResult Function(_Clear value)? clear,
+    TResult Function(_ChangeHistory value)? changeHistory,
     required TResult orElse(),
   }) {
     if (getResults != null) {
@@ -426,6 +462,8 @@ class _$_GetSuggestionResult implements _GetSuggestionResult {
     required TResult Function(String query) getSuggestions,
     required TResult Function(String query) getResults,
     required TResult Function(int id) getSuggestionResult,
+    required TResult Function() clear,
+    required TResult Function(List<SearchHistoryElement> history) changeHistory,
   }) {
     return getSuggestionResult(id);
   }
@@ -436,6 +474,8 @@ class _$_GetSuggestionResult implements _GetSuggestionResult {
     TResult? Function(String query)? getSuggestions,
     TResult? Function(String query)? getResults,
     TResult? Function(int id)? getSuggestionResult,
+    TResult? Function()? clear,
+    TResult? Function(List<SearchHistoryElement> history)? changeHistory,
   }) {
     return getSuggestionResult?.call(id);
   }
@@ -446,6 +486,8 @@ class _$_GetSuggestionResult implements _GetSuggestionResult {
     TResult Function(String query)? getSuggestions,
     TResult Function(String query)? getResults,
     TResult Function(int id)? getSuggestionResult,
+    TResult Function()? clear,
+    TResult Function(List<SearchHistoryElement> history)? changeHistory,
     required TResult orElse(),
   }) {
     if (getSuggestionResult != null) {
@@ -460,6 +502,8 @@ class _$_GetSuggestionResult implements _GetSuggestionResult {
     required TResult Function(_GetSuggestions value) getSuggestions,
     required TResult Function(_GetResults value) getResults,
     required TResult Function(_GetSuggestionResult value) getSuggestionResult,
+    required TResult Function(_Clear value) clear,
+    required TResult Function(_ChangeHistory value) changeHistory,
   }) {
     return getSuggestionResult(this);
   }
@@ -470,6 +514,8 @@ class _$_GetSuggestionResult implements _GetSuggestionResult {
     TResult? Function(_GetSuggestions value)? getSuggestions,
     TResult? Function(_GetResults value)? getResults,
     TResult? Function(_GetSuggestionResult value)? getSuggestionResult,
+    TResult? Function(_Clear value)? clear,
+    TResult? Function(_ChangeHistory value)? changeHistory,
   }) {
     return getSuggestionResult?.call(this);
   }
@@ -480,6 +526,8 @@ class _$_GetSuggestionResult implements _GetSuggestionResult {
     TResult Function(_GetSuggestions value)? getSuggestions,
     TResult Function(_GetResults value)? getResults,
     TResult Function(_GetSuggestionResult value)? getSuggestionResult,
+    TResult Function(_Clear value)? clear,
+    TResult Function(_ChangeHistory value)? changeHistory,
     required TResult orElse(),
   }) {
     if (getSuggestionResult != null) {
@@ -499,10 +547,287 @@ abstract class _GetSuggestionResult implements SearchEvent {
 }
 
 /// @nodoc
+abstract class _$$_ClearCopyWith<$Res> {
+  factory _$$_ClearCopyWith(_$_Clear value, $Res Function(_$_Clear) then) =
+      __$$_ClearCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_ClearCopyWithImpl<$Res>
+    extends _$SearchEventCopyWithImpl<$Res, _$_Clear>
+    implements _$$_ClearCopyWith<$Res> {
+  __$$_ClearCopyWithImpl(_$_Clear _value, $Res Function(_$_Clear) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_Clear implements _Clear {
+  const _$_Clear();
+
+  @override
+  String toString() {
+    return 'SearchEvent.clear()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_Clear);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String query) getSuggestions,
+    required TResult Function(String query) getResults,
+    required TResult Function(int id) getSuggestionResult,
+    required TResult Function() clear,
+    required TResult Function(List<SearchHistoryElement> history) changeHistory,
+  }) {
+    return clear();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String query)? getSuggestions,
+    TResult? Function(String query)? getResults,
+    TResult? Function(int id)? getSuggestionResult,
+    TResult? Function()? clear,
+    TResult? Function(List<SearchHistoryElement> history)? changeHistory,
+  }) {
+    return clear?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String query)? getSuggestions,
+    TResult Function(String query)? getResults,
+    TResult Function(int id)? getSuggestionResult,
+    TResult Function()? clear,
+    TResult Function(List<SearchHistoryElement> history)? changeHistory,
+    required TResult orElse(),
+  }) {
+    if (clear != null) {
+      return clear();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetSuggestions value) getSuggestions,
+    required TResult Function(_GetResults value) getResults,
+    required TResult Function(_GetSuggestionResult value) getSuggestionResult,
+    required TResult Function(_Clear value) clear,
+    required TResult Function(_ChangeHistory value) changeHistory,
+  }) {
+    return clear(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetSuggestions value)? getSuggestions,
+    TResult? Function(_GetResults value)? getResults,
+    TResult? Function(_GetSuggestionResult value)? getSuggestionResult,
+    TResult? Function(_Clear value)? clear,
+    TResult? Function(_ChangeHistory value)? changeHistory,
+  }) {
+    return clear?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetSuggestions value)? getSuggestions,
+    TResult Function(_GetResults value)? getResults,
+    TResult Function(_GetSuggestionResult value)? getSuggestionResult,
+    TResult Function(_Clear value)? clear,
+    TResult Function(_ChangeHistory value)? changeHistory,
+    required TResult orElse(),
+  }) {
+    if (clear != null) {
+      return clear(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Clear implements SearchEvent {
+  const factory _Clear() = _$_Clear;
+}
+
+/// @nodoc
+abstract class _$$_ChangeHistoryCopyWith<$Res> {
+  factory _$$_ChangeHistoryCopyWith(
+          _$_ChangeHistory value, $Res Function(_$_ChangeHistory) then) =
+      __$$_ChangeHistoryCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<SearchHistoryElement> history});
+}
+
+/// @nodoc
+class __$$_ChangeHistoryCopyWithImpl<$Res>
+    extends _$SearchEventCopyWithImpl<$Res, _$_ChangeHistory>
+    implements _$$_ChangeHistoryCopyWith<$Res> {
+  __$$_ChangeHistoryCopyWithImpl(
+      _$_ChangeHistory _value, $Res Function(_$_ChangeHistory) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? history = null,
+  }) {
+    return _then(_$_ChangeHistory(
+      null == history
+          ? _value._history
+          : history // ignore: cast_nullable_to_non_nullable
+              as List<SearchHistoryElement>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ChangeHistory implements _ChangeHistory {
+  const _$_ChangeHistory(final List<SearchHistoryElement> history)
+      : _history = history;
+
+  final List<SearchHistoryElement> _history;
+  @override
+  List<SearchHistoryElement> get history {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_history);
+  }
+
+  @override
+  String toString() {
+    return 'SearchEvent.changeHistory(history: $history)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ChangeHistory &&
+            const DeepCollectionEquality().equals(other._history, _history));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_history));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ChangeHistoryCopyWith<_$_ChangeHistory> get copyWith =>
+      __$$_ChangeHistoryCopyWithImpl<_$_ChangeHistory>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String query) getSuggestions,
+    required TResult Function(String query) getResults,
+    required TResult Function(int id) getSuggestionResult,
+    required TResult Function() clear,
+    required TResult Function(List<SearchHistoryElement> history) changeHistory,
+  }) {
+    return changeHistory(history);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String query)? getSuggestions,
+    TResult? Function(String query)? getResults,
+    TResult? Function(int id)? getSuggestionResult,
+    TResult? Function()? clear,
+    TResult? Function(List<SearchHistoryElement> history)? changeHistory,
+  }) {
+    return changeHistory?.call(history);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String query)? getSuggestions,
+    TResult Function(String query)? getResults,
+    TResult Function(int id)? getSuggestionResult,
+    TResult Function()? clear,
+    TResult Function(List<SearchHistoryElement> history)? changeHistory,
+    required TResult orElse(),
+  }) {
+    if (changeHistory != null) {
+      return changeHistory(history);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetSuggestions value) getSuggestions,
+    required TResult Function(_GetResults value) getResults,
+    required TResult Function(_GetSuggestionResult value) getSuggestionResult,
+    required TResult Function(_Clear value) clear,
+    required TResult Function(_ChangeHistory value) changeHistory,
+  }) {
+    return changeHistory(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetSuggestions value)? getSuggestions,
+    TResult? Function(_GetResults value)? getResults,
+    TResult? Function(_GetSuggestionResult value)? getSuggestionResult,
+    TResult? Function(_Clear value)? clear,
+    TResult? Function(_ChangeHistory value)? changeHistory,
+  }) {
+    return changeHistory?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetSuggestions value)? getSuggestions,
+    TResult Function(_GetResults value)? getResults,
+    TResult Function(_GetSuggestionResult value)? getSuggestionResult,
+    TResult Function(_Clear value)? clear,
+    TResult Function(_ChangeHistory value)? changeHistory,
+    required TResult orElse(),
+  }) {
+    if (changeHistory != null) {
+      return changeHistory(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ChangeHistory implements SearchEvent {
+  const factory _ChangeHistory(final List<SearchHistoryElement> history) =
+      _$_ChangeHistory;
+
+  List<SearchHistoryElement> get history;
+  @JsonKey(ignore: true)
+  _$$_ChangeHistoryCopyWith<_$_ChangeHistory> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$SearchState {
   FormzStatus get status => throw _privateConstructorUsedError;
   List<SuggestionEntity> get suggestions => throw _privateConstructorUsedError;
   List<RecipeEntity> get results => throw _privateConstructorUsedError;
+  List<SearchHistoryElement> get history => throw _privateConstructorUsedError;
   String get errorMessage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -520,6 +845,7 @@ abstract class $SearchStateCopyWith<$Res> {
       {FormzStatus status,
       List<SuggestionEntity> suggestions,
       List<RecipeEntity> results,
+      List<SearchHistoryElement> history,
       String errorMessage});
 }
 
@@ -539,6 +865,7 @@ class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState>
     Object? status = null,
     Object? suggestions = null,
     Object? results = null,
+    Object? history = null,
     Object? errorMessage = null,
   }) {
     return _then(_value.copyWith(
@@ -554,6 +881,10 @@ class _$SearchStateCopyWithImpl<$Res, $Val extends SearchState>
           ? _value.results
           : results // ignore: cast_nullable_to_non_nullable
               as List<RecipeEntity>,
+      history: null == history
+          ? _value.history
+          : history // ignore: cast_nullable_to_non_nullable
+              as List<SearchHistoryElement>,
       errorMessage: null == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
@@ -574,6 +905,7 @@ abstract class _$$_SearchStateCopyWith<$Res>
       {FormzStatus status,
       List<SuggestionEntity> suggestions,
       List<RecipeEntity> results,
+      List<SearchHistoryElement> history,
       String errorMessage});
 }
 
@@ -591,6 +923,7 @@ class __$$_SearchStateCopyWithImpl<$Res>
     Object? status = null,
     Object? suggestions = null,
     Object? results = null,
+    Object? history = null,
     Object? errorMessage = null,
   }) {
     return _then(_$_SearchState(
@@ -606,6 +939,10 @@ class __$$_SearchStateCopyWithImpl<$Res>
           ? _value._results
           : results // ignore: cast_nullable_to_non_nullable
               as List<RecipeEntity>,
+      history: null == history
+          ? _value._history
+          : history // ignore: cast_nullable_to_non_nullable
+              as List<SearchHistoryElement>,
       errorMessage: null == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
@@ -621,9 +958,11 @@ class _$_SearchState implements _SearchState {
       {this.status = FormzStatus.pure,
       final List<SuggestionEntity> suggestions = const [],
       final List<RecipeEntity> results = const [],
+      final List<SearchHistoryElement> history = const [],
       this.errorMessage = ''})
       : _suggestions = suggestions,
-        _results = results;
+        _results = results,
+        _history = history;
 
   @override
   @JsonKey()
@@ -644,13 +983,21 @@ class _$_SearchState implements _SearchState {
     return EqualUnmodifiableListView(_results);
   }
 
+  final List<SearchHistoryElement> _history;
+  @override
+  @JsonKey()
+  List<SearchHistoryElement> get history {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_history);
+  }
+
   @override
   @JsonKey()
   final String errorMessage;
 
   @override
   String toString() {
-    return 'SearchState(status: $status, suggestions: $suggestions, results: $results, errorMessage: $errorMessage)';
+    return 'SearchState(status: $status, suggestions: $suggestions, results: $results, history: $history, errorMessage: $errorMessage)';
   }
 
   @override
@@ -662,6 +1009,7 @@ class _$_SearchState implements _SearchState {
             const DeepCollectionEquality()
                 .equals(other._suggestions, _suggestions) &&
             const DeepCollectionEquality().equals(other._results, _results) &&
+            const DeepCollectionEquality().equals(other._history, _history) &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage));
   }
@@ -672,6 +1020,7 @@ class _$_SearchState implements _SearchState {
       status,
       const DeepCollectionEquality().hash(_suggestions),
       const DeepCollectionEquality().hash(_results),
+      const DeepCollectionEquality().hash(_history),
       errorMessage);
 
   @JsonKey(ignore: true)
@@ -686,6 +1035,7 @@ abstract class _SearchState implements SearchState {
       {final FormzStatus status,
       final List<SuggestionEntity> suggestions,
       final List<RecipeEntity> results,
+      final List<SearchHistoryElement> history,
       final String errorMessage}) = _$_SearchState;
 
   @override
@@ -694,6 +1044,8 @@ abstract class _SearchState implements SearchState {
   List<SuggestionEntity> get suggestions;
   @override
   List<RecipeEntity> get results;
+  @override
+  List<SearchHistoryElement> get history;
   @override
   String get errorMessage;
   @override

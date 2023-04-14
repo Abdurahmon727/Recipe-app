@@ -37,7 +37,7 @@ class _TabNavigatorState extends State<TabNavigator>
         };
       case NavItemEnum.search:
         return {
-          TabNavigatorRoutes.root: (context) => const SearchPage(),
+          TabNavigatorRoutes.root: (context) => SearchPage(),
         };
       case NavItemEnum.favourites:
         return {
