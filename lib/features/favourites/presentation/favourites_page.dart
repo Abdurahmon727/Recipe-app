@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
-import 'package:remote_recipe/assets/animations/animations.dart';
-import 'package:remote_recipe/core/app_functions.dart';
+import '../../../assets/animations/animations.dart';
+import '../../../core/app_functions.dart';
 
 import '../../../assets/colors/colors.dart';
 import '../../../core/data/service_locator.dart';
