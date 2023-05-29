@@ -3,7 +3,6 @@ import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../data/repository/favourites_repo_impl.dart';
 import '../../domain/repository/favourites_repo.dart';
-import '../../../../main.dart';
 
 import '../../../../core/models/formz/formz_status.dart';
 import '../../../home/domain/entity/recipe.dart';

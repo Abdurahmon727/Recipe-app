@@ -1,10 +1,9 @@
-import 'package:remote_recipe/core/error/exeptions.dart';
-import 'package:remote_recipe/core/error/failure.dart';
-import 'package:remote_recipe/core/data/either.dart';
-import 'package:remote_recipe/features/favourites/domain/repository/favourites_repo.dart';
-import 'package:remote_recipe/features/home/domain/entity/recipe.dart';
-import 'package:remote_recipe/main.dart';
-import 'package:remote_recipe/objectbox.dart';
+import '../../../../core/error/exeptions.dart';
+import '../../../../core/error/failure.dart';
+import '../../../../core/data/either.dart';
+import '../../domain/repository/favourites_repo.dart';
+import '../../../home/domain/entity/recipe.dart';
+import '../../../../main.dart';
 
 class FavouritesRepositoryImpl extends FavouritesRepository {
   @override

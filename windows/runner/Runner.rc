@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "remote_recipe" "\0"
+            VALUE "FileDescription", "Cook Yourself" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "remote_recipe" "\0"
+            VALUE "InternalName", "Cook Yourself" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
             VALUE "OriginalFilename", "remote_recipe.exe" "\0"
-            VALUE "ProductName", "remote_recipe" "\0"
+            VALUE "ProductName", "Cook Yourself" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

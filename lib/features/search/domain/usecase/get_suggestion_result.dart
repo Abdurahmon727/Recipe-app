@@ -5,7 +5,6 @@ import '../../../home/domain/entity/recipe.dart';
 import '../../data/repository/search_repo_impl.dart';
 import '../repository/search_repo.dart';
 
-import '../entity/suggestion.dart';
 
 class GetSuggestionResultUseCase implements UseCase<List<RecipeEntity>, int> {
   final SearchRepository _repository = SearchRepositoryImpl();

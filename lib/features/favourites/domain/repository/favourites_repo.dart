@@ -1,5 +1,5 @@
-import 'package:remote_recipe/core/error/failure.dart';
-import 'package:remote_recipe/features/home/domain/entity/recipe.dart';
+import '../../../../core/error/failure.dart';
+import '../../../home/domain/entity/recipe.dart';
 
 import '../../../../core/data/either.dart';
 

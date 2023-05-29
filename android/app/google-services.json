@@ -14,6 +14,51 @@
       },
       "oauth_client": [
         {
+          "client_id": "77153589999-fcl9aed8na3g4otd6o0h2mhg0afrlob6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.remote_recipe",
+            "certificate_hash": "a2bbd57fb3fdc57499506e5b71a83db35d426964"
+          }
+        },
+        {
+          "client_id": "77153589999-1d5nlr1u0puo26u8kfp4moss29hlo21l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0mvNNYk7XiuNyUQyHwcW4dwDa_iQvCg8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "77153589999-1d5nlr1u0puo26u8kfp4moss29hlo21l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:77153589999:android:fd5da8feca95db0e94d91a",
+        "android_client_info": {
+          "package_name": "com.xda.cookyourself"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "77153589999-d5ffmrt7mgp1bcvel85055ua5f0ig3ne.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.xda.cookyourself",
+            "certificate_hash": "a2bbd57fb3fdc57499506e5b71a83db35d426964"
+          }
+        },
+        {
           "client_id": "77153589999-1d5nlr1u0puo26u8kfp4moss29hlo21l.apps.googleusercontent.com",
           "client_type": 3
         }

@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
-import 'package:remote_recipe/core/widgets/w_scale.dart';
-import 'package:remote_recipe/features/search/domain/entity/search_history.dart';
-import 'package:remote_recipe/main.dart';
+import '../../../core/widgets/w_scale.dart';
+import '../../../main.dart';
 
 import '../../../assets/animations/animations.dart';
 import '../../../assets/colors/colors.dart';
