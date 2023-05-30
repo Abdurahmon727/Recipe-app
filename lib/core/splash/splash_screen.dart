@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:remote_recipe/assets/images/images.dart';
 
 import '../../assets/colors/colors.dart';
 
