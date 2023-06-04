@@ -29,7 +29,7 @@ class SignInNumberPage extends StatelessWidget {
                     key: textFieldKey,
                     child: Column(children: [
                       const Text(
-                        'Sign in to your accound',
+                        'Sign in to your account',
                       ),
                       const SizedBox(
                         height: 10,

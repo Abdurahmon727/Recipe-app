@@ -33,10 +33,11 @@ Future<void> main() async {
   final fcmToken = await FirebaseMessaging.instance.getToken();
   print('FCM: $fcmToken');
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-    print('Message data: ${message.data}');
+    print('MESSAGE data: ${message.data}');
 
     if (message.notification != null) {
-      print('Message also contained a notification: ${message.notification}');
+      print(
+          'MESSAGE also contained a notification: ${message.notification?.title}');
     }
   });
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
@@ -128,5 +129,3 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-
-

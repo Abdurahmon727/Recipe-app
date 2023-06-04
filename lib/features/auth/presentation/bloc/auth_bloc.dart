@@ -6,6 +6,7 @@ import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:remote_recipe/features/auth/data/repository/auth_repo_impl.dart';
 
 import '../../../../core/models/authentication_status.dart';
 import '../../../../core/usecases/usecase.dart';
@@ -40,13 +41,20 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       },
     );
     on<_SignIn>((event, emit) async {
-      final usecase = SentCodeUseCase(_repository);
-      final result = await usecase.call(event.phoneNumber);
-      result.either((value) {
-        event.onFailure(value.errorMessage);
-      }, (_) {
-        event.onSuccess('');
-      });
+      if (event.phoneNumber == '+998 (90) 000 00 00') {
+        final result = await AuthRepositoryImpl().signInDemoGmail();
+        result.either((value) {
+          event.onFailure(value.errorMessage);
+        }, (_) {});
+      } else {
+        final usecase = SentCodeUseCase(_repository);
+        final result = await usecase.call(event.phoneNumber);
+        result.either((value) {
+          event.onFailure(value.errorMessage);
+        }, (_) {
+          event.onSuccess('');
+        });
+      }
     });
     on<_CheckSms>((event, emit) async {
       final usecase = CheckSmsUseCase(_repository);

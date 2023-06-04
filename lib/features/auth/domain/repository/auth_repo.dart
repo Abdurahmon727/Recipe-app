@@ -12,4 +12,5 @@ abstract class AuthRepository {
   Future<Either<ServerFailure, void>> checkSms(String smsCode);
   Future<Either<Failure, void>> logOut();
   Future<Either<Failure, File>> getImageLink(String image);
+  Future<Either<Failure, void>> signInDemoGmail();
 }

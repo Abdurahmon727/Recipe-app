@@ -83,4 +83,21 @@ class AuthRepositoryImpl extends AuthRepository {
 
     throw UnimplementedError();
   }
+
+  @override
+  Future<Either<Failure, void>> signInDemoGmail() async {
+    if (await _networkInfo.connected) {
+      try {
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+            email: 'demo@gmail.com', password: '12345678');
+        return Right(null);
+      } on FirebaseAuthException catch (_) {
+        return Left(const ServerFailure(errorMessage: 'No user found'));
+      } catch (e) {
+        return Left(const ServerFailure(errorMessage: 'Something went wrong('));
+      }
+    } else {
+      return Left(const ServerFailure(errorMessage: 'No Internet'));
+    }
+  }
 }
