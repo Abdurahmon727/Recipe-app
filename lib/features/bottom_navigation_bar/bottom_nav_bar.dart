@@ -119,7 +119,7 @@ class _BottomNavBarState extends State<BottomNavBar>
             child: Scaffold(
               resizeToAvoidBottomInset: true,
               bottomNavigationBar: Container(
-                height: 72 + MediaQuery.of(context).padding.bottom,
+                height: 65 + MediaQuery.of(context).padding.bottom,
                 decoration: const BoxDecoration(
                     // color: navigationBarBackgroundColor,
                     ),
@@ -165,7 +165,7 @@ class _BottomNavBarState extends State<BottomNavBar>
                 ),
               ),
               body: TabBarView(
-                physics: const AlwaysScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 controller: _controller,
                 children: [
                   _buildPageNavigator(NavItemEnum.home),
