@@ -198,7 +198,7 @@ class SearchPage extends StatelessWidget {
                 );
               } else {
                 return const Center(
-                  child: Text('Nothing found'),
+                  child: Text('Nothing found 😣'),
                 );
               }
             } else {

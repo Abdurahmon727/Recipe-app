@@ -129,7 +129,7 @@ class _BottomNavBarState extends State<BottomNavBar>
                     TabBar(
                       dividerColor: Colors.transparent,
                       splashBorderRadius: BorderRadius.zero,
-                      enableFeedback: true,
+                      enableFeedback: false,
                       onTap: (index) {
                         if (index == 0 &&
                             oldIndex == 0 &&
