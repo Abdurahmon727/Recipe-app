@@ -15,7 +15,6 @@ class HomeRepositoryImpl extends HomeRepository {
     if (await _networkInfo.connected) {
       try {
         final data = await _remoteDataSource.getRecipes();
-
         return Right(Converter.recipeModelsToEntities(data));
       } on ServerException {
         rethrow;

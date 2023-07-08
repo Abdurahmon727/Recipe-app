@@ -127,6 +127,7 @@ class _BottomNavBarState extends State<BottomNavBar>
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     TabBar(
+                      dividerColor: Colors.transparent,
                       splashBorderRadius: BorderRadius.zero,
                       enableFeedback: true,
                       onTap: (index) {
