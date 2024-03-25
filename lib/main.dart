@@ -59,22 +59,35 @@ class _MyAppState extends State<MyApp> {
 
   NavigatorState get navigator => navigatorKey.currentState!;
 
+  void navigateToRecipeDetail(PendingDynamicLinkData linkData) {
+    final productId = linkData.link.path.replaceAll('/', '');
+    navigator.push(
+      fade(
+        page: DetailedRecipeLoadPage(
+          id: int.parse(productId),
+        ),
+      ),
+    );
+    debugPrint('DYNAMIC LINK: $productId');
+  }
+
   @override
   void initState() {
     super.initState();
+    FirebaseDynamicLinks.instance.getInitialLink().then((linkData) {
+      if (linkData != null) {
+        navigateToRecipeDetail(linkData);
+      } else {
+        debugPrint('DYNAMIC LINK NO initial ');
+      }
+    }).catchError((error) {
+      debugPrint('DYNAMIC LINK initial error: $error');
+    });
+
     FirebaseDynamicLinks.instance.onLink.listen((linkData) {
-      final productId = linkData.link.path.replaceAll('/', '');
-      navigator.push(
-        fade(
-          page: DetailedRecipeLoadPage(
-            id: int.parse(productId),
-          ),
-        ),
-      );
-      print('DYNAMIC LINK: $productId');
+      navigateToRecipeDetail(linkData);
     }).onError((error) {
-      print('onLink error');
-      print(error.message);
+      debugPrint('DYNAMIC LINK error: $error');
     });
   }
 
@@ -84,11 +97,13 @@ class _MyAppState extends State<MyApp> {
       providers: [
         BlocProvider<FavouritesBloc>(
           create: (context) => serviceLocator<FavouritesBloc>()
-            ..add(FavouritesEvent.getRecipes(
-              onFailure: (errorMessage) {
-                AppFunctions.showSnackbar(context, errorMessage);
-              },
-            )),
+            ..add(
+              FavouritesEvent.getRecipes(
+                onFailure: (errorMessage) {
+                  AppFunctions.showSnackbar(context, errorMessage);
+                },
+              ),
+            ),
         ),
         BlocProvider(
           create: (context) => AuthBloc(serviceLocator<AuthRepository>()),

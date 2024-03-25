@@ -10,6 +10,6 @@ final keys = [
   '2a5e14fde87e48e8a266680987243770',
   'd85a3661a88d4b32b4bcb50698f116b7',
 ];
-final apiKey = keys[4];
+final apiKey = keys[0];
 
 abstract class AppConstants {}
